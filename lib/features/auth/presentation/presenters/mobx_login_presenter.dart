@@ -1,10 +1,17 @@
 import 'package:mobx/mobx.dart';
+import 'package:tasks_app/core/error/failures.dart';
+
+import '../../domain/usecases/index.dart';
 
 part 'mobx_login_presenter.g.dart';
 
 class MobxLoginPresenter = _MobxLoginPresenter with _$MobxLoginPresenter;
 
 abstract class _MobxLoginPresenter with Store {
+  final Authentication usecase;
+
+  _MobxLoginPresenter({required this.usecase});
+
   @computed
   String get usernameError => username == null
       ? ''
@@ -56,11 +63,19 @@ abstract class _MobxLoginPresenter with Store {
     mainError = null;
     navigateTo = null;
     isLoading = true;
-    await Future.delayed(const Duration(seconds: 2));
-
-    isLoading = false;
+    // await Future.delayed(const Duration(seconds: 2));
+    final value = await usecase(AuthenticationParams(
+      username: username!,
+      password: password!,
+    ));
+    value.fold((failure) {
+      isLoading = false;
+      mainError = failure.message;
+    }, (account) {
+      isLoading = false;
+      navigateTo = '/home';
+    });
 
     // mainError = 'Teste Error';
-    navigateTo = '/home';
   }
 }

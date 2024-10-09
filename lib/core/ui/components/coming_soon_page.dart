@@ -12,13 +12,9 @@ class ComingSoonPage extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Hero(
-              tag: 'ic_launcher',
-              child: Image.asset('assets/ic.png'),
-            ),
-            const SizedBox(height: 40),
-            const Text(
+          children: const [
+            SizedBox(height: 40),
+            Text(
               'Já estamos trabalhando nisso. Aguarde, em breve estará disponível.',
               textAlign: TextAlign.center,
               style: TextStyle(

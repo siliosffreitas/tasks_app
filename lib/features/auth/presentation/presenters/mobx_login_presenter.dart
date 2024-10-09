@@ -5,14 +5,26 @@ part 'mobx_login_presenter.g.dart';
 class MobxLoginPresenter = _MobxLoginPresenter with _$MobxLoginPresenter;
 
 abstract class _MobxLoginPresenter with Store {
-  @observable
-  String usernameError = '';
+  @computed
+  String get usernameError => username == null
+      ? ''
+      : username!.isEmpty
+          ? 'E-mail obrigatório'
+          : '';
 
-  @observable
-  String passwordError = '';
+  @computed
+  String get passwordError => password == null
+      ? ''
+      : password!.isEmpty
+          ? 'Senha obrigatória'
+          : '';
 
-  @observable
-  bool isFormValid = false;
+  @computed
+  bool get isFormValid =>
+      username != null &&
+      username!.isNotEmpty &&
+      password != null &&
+      password!.isNotEmpty;
 
   @observable
   bool isLoading = false;
@@ -23,25 +35,21 @@ abstract class _MobxLoginPresenter with Store {
   @observable
   String? navigateToStream;
 
-  String? _username;
-  String? _password;
+  @observable
+  String? username;
+
+  @observable
+  String? password;
 
   @action
-  void validateUserName(String userName) {
-    _username = userName;
-    _calculateValidForm();
+  void validateUserName(String username) {
+    this.username = username;
   }
 
   @action
   void validatePassword(String password) {
-    _password = password;
-    _calculateValidForm();
+    this.password = password;
   }
-
-  void _calculateValidForm() => isFormValid = _username != null &&
-      _username!.isNotEmpty &&
-      _password != null &&
-      _password!.isNotEmpty;
 
   @action
   Future<void> auth() async {

@@ -9,53 +9,27 @@ part of 'mobx_login_presenter.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$MobxLoginPresenter on _MobxLoginPresenter, Store {
-  late final _$usernameErrorAtom =
-      Atom(name: '_MobxLoginPresenter.usernameError', context: context);
+  Computed<String>? _$usernameErrorComputed;
 
   @override
-  String get usernameError {
-    _$usernameErrorAtom.reportRead();
-    return super.usernameError;
-  }
+  String get usernameError =>
+      (_$usernameErrorComputed ??= Computed<String>(() => super.usernameError,
+              name: '_MobxLoginPresenter.usernameError'))
+          .value;
+  Computed<String>? _$passwordErrorComputed;
 
   @override
-  set usernameError(String value) {
-    _$usernameErrorAtom.reportWrite(value, super.usernameError, () {
-      super.usernameError = value;
-    });
-  }
-
-  late final _$passwordErrorAtom =
-      Atom(name: '_MobxLoginPresenter.passwordError', context: context);
+  String get passwordError =>
+      (_$passwordErrorComputed ??= Computed<String>(() => super.passwordError,
+              name: '_MobxLoginPresenter.passwordError'))
+          .value;
+  Computed<bool>? _$isFormValidComputed;
 
   @override
-  String get passwordError {
-    _$passwordErrorAtom.reportRead();
-    return super.passwordError;
-  }
-
-  @override
-  set passwordError(String value) {
-    _$passwordErrorAtom.reportWrite(value, super.passwordError, () {
-      super.passwordError = value;
-    });
-  }
-
-  late final _$isFormValidAtom =
-      Atom(name: '_MobxLoginPresenter.isFormValid', context: context);
-
-  @override
-  bool get isFormValid {
-    _$isFormValidAtom.reportRead();
-    return super.isFormValid;
-  }
-
-  @override
-  set isFormValid(bool value) {
-    _$isFormValidAtom.reportWrite(value, super.isFormValid, () {
-      super.isFormValid = value;
-    });
-  }
+  bool get isFormValid =>
+      (_$isFormValidComputed ??= Computed<bool>(() => super.isFormValid,
+              name: '_MobxLoginPresenter.isFormValid'))
+          .value;
 
   late final _$isLoadingAtom =
       Atom(name: '_MobxLoginPresenter.isLoading', context: context);
@@ -105,6 +79,38 @@ mixin _$MobxLoginPresenter on _MobxLoginPresenter, Store {
     });
   }
 
+  late final _$usernameAtom =
+      Atom(name: '_MobxLoginPresenter.username', context: context);
+
+  @override
+  String? get username {
+    _$usernameAtom.reportRead();
+    return super.username;
+  }
+
+  @override
+  set username(String? value) {
+    _$usernameAtom.reportWrite(value, super.username, () {
+      super.username = value;
+    });
+  }
+
+  late final _$passwordAtom =
+      Atom(name: '_MobxLoginPresenter.password', context: context);
+
+  @override
+  String? get password {
+    _$passwordAtom.reportRead();
+    return super.password;
+  }
+
+  @override
+  set password(String? value) {
+    _$passwordAtom.reportWrite(value, super.password, () {
+      super.password = value;
+    });
+  }
+
   late final _$authAsyncAction =
       AsyncAction('_MobxLoginPresenter.auth', context: context);
 
@@ -117,11 +123,11 @@ mixin _$MobxLoginPresenter on _MobxLoginPresenter, Store {
       ActionController(name: '_MobxLoginPresenter', context: context);
 
   @override
-  void validateUserName(String userName) {
+  void validateUserName(String username) {
     final _$actionInfo = _$_MobxLoginPresenterActionController.startAction(
         name: '_MobxLoginPresenter.validateUserName');
     try {
-      return super.validateUserName(userName);
+      return super.validateUserName(username);
     } finally {
       _$_MobxLoginPresenterActionController.endAction(_$actionInfo);
     }
@@ -141,12 +147,14 @@ mixin _$MobxLoginPresenter on _MobxLoginPresenter, Store {
   @override
   String toString() {
     return '''
-usernameError: ${usernameError},
-passwordError: ${passwordError},
-isFormValid: ${isFormValid},
 isLoading: ${isLoading},
 mainErrorStream: ${mainErrorStream},
-navigateToStream: ${navigateToStream}
+navigateToStream: ${navigateToStream},
+username: ${username},
+password: ${password},
+usernameError: ${usernameError},
+passwordError: ${passwordError},
+isFormValid: ${isFormValid}
     ''';
   }
 }

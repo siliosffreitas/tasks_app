@@ -44,12 +44,12 @@ class LoginPage extends StatelessWidget with LoadingManager, UiErrorManager {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       const SizedBox(height: 20),
-                      const Text('Nome de usuário'),
+                      const Text('E-mail'),
                       const SizedBox(height: 4),
                       Observer(
                         builder: (_) => TextFormField(
                           decoration: InputDecoration(
-                            hintText: 'Nome de usuário',
+                            hintText: 'E-mail',
                             errorText: presenter.usernameError.isEmpty == true
                                 ? null
                                 : presenter.usernameError,

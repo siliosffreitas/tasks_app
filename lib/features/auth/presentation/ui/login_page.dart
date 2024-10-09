@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
 
 import '../../../../../core/ui/mixins/index.dart';
+import '../../../../core/ui/components/index.dart';
 import '../presenters/mobx_login_presenter.dart';
 
 class LoginPage extends StatelessWidget with LoadingManager, UiErrorManager {
@@ -12,16 +14,31 @@ class LoginPage extends StatelessWidget with LoadingManager, UiErrorManager {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Builder(builder: (context) {
-        // handleLoading(context, presenter.isLoadingStream);
-        // handleMainError(context, presenter.mainErrorStream);
+        reaction((_) => presenter.mainError, (_) {
+          if (presenter.mainError != null) {
+            showMessage(context, presenter.mainError!);
+          }
+        });
 
-        // presenter.navigateToStream.listen(
-        //   (page) {
-        //     if (page != null && page.isNotEmpty) {
-        //       Navigator.pushReplacementNamed(context, page);
-        //     }
-        //   },
-        // );
+        reaction((_) => presenter.isLoading, (_) {
+          if (presenter.isLoading) {
+            showLoading(context);
+          } else {
+            hideLoading(context);
+          }
+        });
+
+        reaction((_) => presenter.navigateTo, (_) {
+          if (presenter.navigateTo != null &&
+              presenter.navigateTo!.isNotEmpty) {
+            String page = presenter.navigateTo!;
+            if (page == '/home') {
+              Navigator.of(context).pushNamedAndRemoveUntil(page, (_) => false);
+            } else {
+              Navigator.of(context).pushNamed(page);
+            }
+          }
+        });
 
         return SingleChildScrollView(
           child: Form(
@@ -73,15 +90,11 @@ class LoginPage extends StatelessWidget with LoadingManager, UiErrorManager {
                       ),
                       const SizedBox(height: 40),
                       Observer(
-                        builder: (_) => presenter.isLoading
-                            ? const Center(child: CircularProgressIndicator())
-                            : Observer(
-                                builder: (_) => ElevatedButton(
-                                    onPressed: presenter.isFormValid == true
-                                        ? presenter.auth
-                                        : null,
-                                    child: const Text('Entrar')),
-                              ),
+                        builder: (_) => ElevatedButton(
+                            onPressed: presenter.isFormValid == true
+                                ? presenter.auth
+                                : null,
+                            child: const Text('Entrar')),
                       ),
                     ],
                   ),

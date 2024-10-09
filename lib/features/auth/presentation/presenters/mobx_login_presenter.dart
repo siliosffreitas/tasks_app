@@ -53,9 +53,14 @@ abstract class _MobxLoginPresenter with Store {
 
   @action
   Future<void> auth() async {
+    mainError = null;
+    navigateTo = null;
     isLoading = true;
     await Future.delayed(const Duration(seconds: 2));
 
     isLoading = false;
+
+    // mainError = 'Teste Error';
+    navigateTo = '/home';
   }
 }

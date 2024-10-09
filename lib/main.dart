@@ -4,6 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'core/ui/components/coming_soon_page.dart';
 import 'features/auth/presentation/presenters/mobx_login_presenter.dart';
 import 'features/auth/presentation/ui/login_page.dart';
+import 'features/home/presentation/ui/home_page.dart';
 import 'injection_container.dart';
 
 void main() {
@@ -36,6 +37,9 @@ class MyApp extends StatelessWidget {
         return _buildPage(LoginPage(
           presenter: Modular.get<MobxLoginPresenter>(),
         ));
+
+      case '/home':
+        return _buildPage(HomePage());
 
       default:
         return _buildPage(const ComingSoonPage());

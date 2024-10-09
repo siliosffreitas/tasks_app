@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../../../../../core/ui/mixins/index.dart';
-import 'login_presenter.dart';
+import '../presenters/mobx_login_presenter.dart';
 
 class LoginPage extends StatelessWidget with LoadingManager, UiErrorManager {
-  final LoginPresenter presenter;
+  final MobxLoginPresenter presenter;
   const LoginPage({required this.presenter, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Builder(builder: (context) {
-        handleLoading(context, presenter.isLoadingStream);
-        handleMainError(context, presenter.mainErrorStream);
+        // handleLoading(context, presenter.isLoadingStream);
+        // handleMainError(context, presenter.mainErrorStream);
 
-        presenter.navigateToStream.listen(
-          (page) {
-            if (page != null && page.isNotEmpty) {
-              Navigator.pushReplacementNamed(context, page);
-            }
-          },
-        );
+        // presenter.navigateToStream.listen(
+        //   (page) {
+        //     if (page != null && page.isNotEmpty) {
+        //       Navigator.pushReplacementNamed(context, page);
+        //     }
+        //   },
+        // );
 
         return SingleChildScrollView(
           child: Form(
@@ -45,46 +46,43 @@ class LoginPage extends StatelessWidget with LoadingManager, UiErrorManager {
                       const SizedBox(height: 20),
                       const Text('Nome de usuário'),
                       const SizedBox(height: 4),
-                      StreamBuilder<String?>(
-                          stream: presenter.usernameErrorStream,
-                          builder: (context, snapshot) {
-                            return TextFormField(
-                              decoration: InputDecoration(
-                                hintText: 'Nome de usuário',
-                                errorText: snapshot.data?.isEmpty == true
-                                    ? null
-                                    : snapshot.data,
-                              ),
-                              onChanged: presenter.validateUserName,
-                            );
-                          }),
+                      Observer(
+                        builder: (_) => TextFormField(
+                          decoration: InputDecoration(
+                            hintText: 'Nome de usuário',
+                            errorText: presenter.usernameError.isEmpty == true
+                                ? null
+                                : presenter.usernameError,
+                          ),
+                          onChanged: presenter.validateUserName,
+                        ),
+                      ),
                       const SizedBox(height: 20),
                       const Text('Senha'),
                       const SizedBox(height: 4),
-                      StreamBuilder<String?>(
-                          stream: presenter.passwordErrorStream,
-                          builder: (context, snapshot) {
-                            return TextFormField(
-                              decoration: InputDecoration(
-                                hintText: 'Senha',
-                                errorText: snapshot.data?.isEmpty == true
-                                    ? null
-                                    : snapshot.data,
-                              ),
-                              obscureText: true,
-                              onChanged: presenter.validatePassword,
-                            );
-                          }),
+                      Observer(
+                        builder: (_) => TextFormField(
+                          decoration: InputDecoration(
+                            hintText: 'Senha',
+                            errorText: presenter.passwordError.isEmpty == true
+                                ? null
+                                : presenter.passwordError,
+                          ),
+                          onChanged: presenter.validatePassword,
+                        ),
+                      ),
                       const SizedBox(height: 40),
-                      StreamBuilder<bool>(
-                          stream: presenter.isFormValidStream,
-                          builder: (context, snapshot) {
-                            return ElevatedButton(
-                                onPressed: snapshot.data == true
-                                    ? presenter.auth
-                                    : null,
-                                child: const Text('Entrar'));
-                          }),
+                      Observer(
+                        builder: (_) => presenter.isLoading
+                            ? const Center(child: CircularProgressIndicator())
+                            : Observer(
+                                builder: (_) => ElevatedButton(
+                                    onPressed: presenter.isFormValid == true
+                                        ? presenter.auth
+                                        : null,
+                                    child: const Text('Entrar')),
+                              ),
+                      ),
                     ],
                   ),
                 ),

@@ -30,10 +30,10 @@ abstract class _MobxLoginPresenter with Store {
   bool isLoading = false;
 
   @observable
-  String? mainErrorStream;
+  String? mainError;
 
   @observable
-  String? navigateToStream;
+  String? navigateTo;
 
   @observable
   String? username;
@@ -55,6 +55,7 @@ abstract class _MobxLoginPresenter with Store {
   Future<void> auth() async {
     isLoading = true;
     await Future.delayed(const Duration(seconds: 2));
+
     isLoading = false;
   }
 }

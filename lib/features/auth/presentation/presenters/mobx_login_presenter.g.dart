@@ -47,35 +47,35 @@ mixin _$MobxLoginPresenter on _MobxLoginPresenter, Store {
     });
   }
 
-  late final _$mainErrorStreamAtom =
-      Atom(name: '_MobxLoginPresenter.mainErrorStream', context: context);
+  late final _$mainErrorAtom =
+      Atom(name: '_MobxLoginPresenter.mainError', context: context);
 
   @override
-  String? get mainErrorStream {
-    _$mainErrorStreamAtom.reportRead();
-    return super.mainErrorStream;
+  String? get mainError {
+    _$mainErrorAtom.reportRead();
+    return super.mainError;
   }
 
   @override
-  set mainErrorStream(String? value) {
-    _$mainErrorStreamAtom.reportWrite(value, super.mainErrorStream, () {
-      super.mainErrorStream = value;
+  set mainError(String? value) {
+    _$mainErrorAtom.reportWrite(value, super.mainError, () {
+      super.mainError = value;
     });
   }
 
-  late final _$navigateToStreamAtom =
-      Atom(name: '_MobxLoginPresenter.navigateToStream', context: context);
+  late final _$navigateToAtom =
+      Atom(name: '_MobxLoginPresenter.navigateTo', context: context);
 
   @override
-  String? get navigateToStream {
-    _$navigateToStreamAtom.reportRead();
-    return super.navigateToStream;
+  String? get navigateTo {
+    _$navigateToAtom.reportRead();
+    return super.navigateTo;
   }
 
   @override
-  set navigateToStream(String? value) {
-    _$navigateToStreamAtom.reportWrite(value, super.navigateToStream, () {
-      super.navigateToStream = value;
+  set navigateTo(String? value) {
+    _$navigateToAtom.reportWrite(value, super.navigateTo, () {
+      super.navigateTo = value;
     });
   }
 
@@ -148,8 +148,8 @@ mixin _$MobxLoginPresenter on _MobxLoginPresenter, Store {
   String toString() {
     return '''
 isLoading: ${isLoading},
-mainErrorStream: ${mainErrorStream},
-navigateToStream: ${navigateToStream},
+mainError: ${mainError},
+navigateTo: ${navigateTo},
 username: ${username},
 password: ${password},
 usernameError: ${usernameError},

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "892810906966",
+    "project_id": "tasks-app-keener",
+    "storage_bucket": "tasks-app-keener.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:892810906966:android:23ce22e760e8b4edc59af7",
+        "android_client_info": {
+          "package_name": "io.keener.tasks.silio.tasks_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMN8XONjxDChDryEDwXC5Mq_I6fJfkdeU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

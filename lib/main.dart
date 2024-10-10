@@ -17,7 +17,8 @@ import 'features/signin/presentation/presenters/mobx_signin_presenter.dart';
 import 'features/signin/presentation/ui/signin_page.dart';
 import 'features/splash/presentation/presenters/mobx_splash_presenter.dart';
 import 'features/splash/presentation/ui/splash_page.dart';
-import 'features/task/presentation/task_page.dart';
+import 'features/task/presentation/presenters/mobx_task_presenter.dart';
+import 'features/task/presentation/ui/task_page.dart';
 import 'injection_container.dart';
 
 Future<void> main() async {
@@ -74,6 +75,7 @@ class MyApp extends StatelessWidget {
         ));
       case '/task':
         return _buildPage(TaskPage(
+          presenter: Modular.get<MobxTaskPresenter>(),
           taskId: settings.arguments as String,
         ));
       default:

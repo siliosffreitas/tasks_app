@@ -95,18 +95,18 @@ mixin _$MobxNewTaskPresenter on _MobxNewTaskPresenter, Store {
     });
   }
 
-  late final _$desciptionAtom =
-      Atom(name: '_MobxNewTaskPresenter.desciption', context: context);
+  late final _$descriptionAtom =
+      Atom(name: '_MobxNewTaskPresenter.description', context: context);
 
   @override
   String? get description {
-    _$desciptionAtom.reportRead();
+    _$descriptionAtom.reportRead();
     return super.description;
   }
 
   @override
   set description(String? value) {
-    _$desciptionAtom.reportWrite(value, super.description, () {
+    _$descriptionAtom.reportWrite(value, super.description, () {
       super.description = value;
     });
   }
@@ -134,11 +134,11 @@ mixin _$MobxNewTaskPresenter on _MobxNewTaskPresenter, Store {
   }
 
   @override
-  void validateDescription(String desciption) {
+  void validateDescription(String description) {
     final _$actionInfo = _$_MobxNewTaskPresenterActionController.startAction(
         name: '_MobxNewTaskPresenter.validateDescription');
     try {
-      return super.validateDescription(desciption);
+      return super.validateDescription(description);
     } finally {
       _$_MobxNewTaskPresenterActionController.endAction(_$actionInfo);
     }
@@ -151,7 +151,7 @@ isLoading: ${isLoading},
 mainError: ${mainError},
 navigateTo: ${navigateTo},
 title: ${title},
-desciption: ${description},
+description: ${description},
 titleError: ${titleError},
 descriptionError: ${descriptionError},
 isFormValid: ${isFormValid}

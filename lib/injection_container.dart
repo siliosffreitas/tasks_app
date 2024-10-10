@@ -7,7 +7,9 @@ import 'features/auth/data/repositories/authentication_repository_impl.dart';
 import 'features/auth/domain/repositories/authentication_repository.dart';
 import 'features/auth/domain/usecases/authentication.dart';
 import 'features/auth/presentation/presenters/mobx_login_presenter.dart';
+import 'features/home/data/datasources/load_tasks_remote_datasource.dart';
 import 'features/home/data/datasources/logout_remote_datasource.dart';
+import 'features/home/data/repositories/load_tasks_repository_impl.dart';
 import 'features/home/data/repositories/logout_repository_impl.dart';
 import 'features/home/domain/repositories/load_tasks_repository.dart';
 import 'features/home/domain/repositories/logout_repository.dart';
@@ -77,6 +79,8 @@ class AppModule extends Module {
 
         Bind<CreateTaskRepository>((_) => CreateTaskRepositoryImpl(
             dataSource: Modular.get<CreateTaskRemoteDataSource>())),
+        Bind<LoadTasksRepository>((_) => LoadTasksRepositoryImpl(
+            dataSource: Modular.get<LoadTasksRemoteDataSource>())),
 
         // datasources
 
@@ -94,6 +98,9 @@ class AppModule extends Module {
             CreateTaskRemoteDataSourceFirebase(
                 firestore: Modular.get<FirebaseFirestore>(),
                 firebaseInstance: Modular.get<FirebaseAuth>())),
+        Bind<LoadTasksRemoteDataSource>((_) => LoadTasksRemoteDataSourceImpl(
+            firestore: Modular.get<FirebaseFirestore>(),
+            firebaseInstance: Modular.get<FirebaseAuth>())),
 
         // extenals
         Bind<FirebaseAuth>((_) => FirebaseAuth.instance),

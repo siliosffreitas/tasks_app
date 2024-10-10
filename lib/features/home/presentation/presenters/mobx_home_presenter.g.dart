@@ -61,13 +61,13 @@ mixin _$MobxHomePresenter on _MobxHomePresenter, Store {
       Atom(name: '_MobxHomePresenter.tasks', context: context);
 
   @override
-  List<TaskViewmodel>? get tasks {
+  List<TaskViewmodel> get tasks {
     _$tasksAtom.reportRead();
     return super.tasks;
   }
 
   @override
-  set tasks(List<TaskViewmodel>? value) {
+  set tasks(List<TaskViewmodel> value) {
     _$tasksAtom.reportWrite(value, super.tasks, () {
       super.tasks = value;
     });
@@ -90,6 +90,17 @@ mixin _$MobxHomePresenter on _MobxHomePresenter, Store {
         name: '_MobxHomePresenter.goToTaskPage');
     try {
       return super.goToTaskPage(id);
+    } finally {
+      _$_MobxHomePresenterActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void goToNewTaskPage() {
+    final _$actionInfo = _$_MobxHomePresenterActionController.startAction(
+        name: '_MobxHomePresenter.goToNewTaskPage');
+    try {
+      return super.goToNewTaskPage();
     } finally {
       _$_MobxHomePresenterActionController.endAction(_$actionInfo);
     }

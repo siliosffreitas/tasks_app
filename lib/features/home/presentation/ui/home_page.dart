@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
         title: const Text('Tarefas'),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: presenter.goToNewTaskPage,
             icon: const Icon(Icons.add_box_rounded),
             tooltip: 'Adicionar nova tarefa',
           )
@@ -33,37 +33,55 @@ class HomePage extends StatelessWidget {
           }
         });
 
+        reaction((_) => presenter.navigateTo, (_) {
+          if (presenter.navigateTo != null &&
+              presenter.navigateTo!.isNotEmpty) {
+            String page = presenter.navigateTo!;
+
+            Navigator.of(context).pushNamed(page);
+          }
+        });
+
         presenter.loadTasks();
         return Observer(
           builder: (context) {
             if (presenter.mainError != null) {
               return ErrorPage(
                 error: presenter.mainError!,
-                onTryAgain: () {
-                  presenter.loadTasks();
-                },
+                onTryAgain: presenter.loadTasks,
               );
             }
-            List<TaskViewmodel>? tasks = presenter.tasks;
-            return ListView.separated(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-              itemBuilder: (contex, index) => Card(
-                child: ListTile(
-                  contentPadding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                  title: Text(tasks![index].title),
-                  subtitle: Text(tasks[index].description),
-                  trailing: const Icon(
-                    Icons.arrow_forward_ios,
+            List<TaskViewmodel> tasks = presenter.tasks;
+
+            if (tasks.isEmpty) {
+              return ErrorPage(
+                  error: 'Nenhuma tarefa adicionada, adicione agora',
+                  onTryAgain: presenter.goToNewTaskPage,
+                  buttonLabel: 'Adicionar nova tarefa');
+            }
+            return RefreshIndicator(
+              onRefresh: presenter.loadTasks,
+              child: ListView.separated(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                itemBuilder: (contex, index) => Card(
+                  child: ListTile(
+                    contentPadding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    title: Text(tasks[index].title),
+                    subtitle: Text(tasks[index].description),
+                    trailing: const Icon(
+                      Icons.arrow_forward_ios,
+                    ),
+                    onTap: () => presenter.goToTaskPage(tasks[index].id),
                   ),
-                  onTap: () {},
                 ),
+                separatorBuilder: (context, index) => const Divider(
+                  color: Colors.transparent,
+                  height: 0,
+                ),
+                itemCount: tasks.length,
               ),
-              separatorBuilder: (context, index) => const Divider(
-                color: Colors.transparent,
-                height: 0,
-              ),
-              itemCount: tasks!.length,
             );
           },
         );

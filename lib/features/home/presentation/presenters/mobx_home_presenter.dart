@@ -17,7 +17,7 @@ abstract class _MobxHomePresenter with Store {
   String? navigateTo;
 
   @observable
-  List<TaskViewmodel>? tasks;
+  List<TaskViewmodel> tasks = [];
 
   @action
   void goToTaskPage(String id) {
@@ -26,9 +26,16 @@ abstract class _MobxHomePresenter with Store {
   }
 
   @action
+  void goToNewTaskPage() {
+    navigateTo = null;
+    navigateTo = '/new_task';
+  }
+
+  @action
   Future<void> loadTasks() async {
     mainError = null;
     navigateTo = null;
+
     isLoading = true;
 
     await Future.delayed(const Duration(seconds: 2));

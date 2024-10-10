@@ -61,13 +61,13 @@ mixin _$MobxHomePresenter on _MobxHomePresenter, Store {
       Atom(name: '_MobxHomePresenter.tasks', context: context);
 
   @override
-  List<TaskViewmodel> get tasks {
+  List<TaskViewmodel>? get tasks {
     _$tasksAtom.reportRead();
     return super.tasks;
   }
 
   @override
-  set tasks(List<TaskViewmodel> value) {
+  set tasks(List<TaskViewmodel>? value) {
     _$tasksAtom.reportWrite(value, super.tasks, () {
       super.tasks = value;
     });

@@ -31,6 +31,8 @@ import 'features/splash/data/repositories/check_has_logged_user_repository_impl.
 import 'features/splash/domain/repositories/check_has_logged_user_repository.dart';
 import 'features/splash/domain/usecases/check_has_logged_user.dart';
 import 'features/splash/presentation/presenters/mobx_splash_presenter.dart';
+import 'features/task/data/datasources/load_task_remote_datasource.dart';
+import 'features/task/data/repositories/load_task_repository_impl.dart';
 import 'features/task/domain/reposirory/load_task_repository.dart';
 import 'features/task/domain/usecases/load_task.dart';
 import 'features/task/presentation/presenters/mobx_task_presenter.dart';
@@ -89,6 +91,8 @@ class AppModule extends Module {
             dataSource: Modular.get<CreateTaskRemoteDataSource>())),
         Bind<LoadTasksRepository>((_) => LoadTasksRepositoryImpl(
             dataSource: Modular.get<LoadTasksRemoteDataSource>())),
+        Bind<LoadTaskRepository>((_) => LoadTaskRepositoryImpl(
+            dataSource: Modular.get<LoadTaskRemoteDataSource>())),
 
         // datasources
 

@@ -1,6 +1,7 @@
 import 'package:mobx/mobx.dart';
 
 import '../../../../core/usecases/usecase.dart';
+import '../../domain/usecases/load_tasks.dart';
 import '../../domain/usecases/logout.dart';
 import '../ui/task_viewmodel.dart';
 
@@ -10,6 +11,8 @@ class MobxHomePresenter = _MobxHomePresenter with _$MobxHomePresenter;
 
 abstract class _MobxHomePresenter with Store {
   final Logout logoutUsecase;
+  final LoadTasks loadTasksUsecase;
+
   @observable
   String? mainError;
 
@@ -22,7 +25,10 @@ abstract class _MobxHomePresenter with Store {
   @observable
   List<TaskViewmodel> tasks = [];
 
-  _MobxHomePresenter({required this.logoutUsecase});
+  _MobxHomePresenter({
+    required this.logoutUsecase,
+    required this.loadTasksUsecase,
+  });
 
   @action
   void goToTaskPage(String id) {
@@ -43,27 +49,20 @@ abstract class _MobxHomePresenter with Store {
 
     isLoading = true;
 
-    await Future.delayed(const Duration(seconds: 2));
-    isLoading = false;
-
-    tasks = [
-      TaskViewmodel(
-        id: '123223123',
-        title: 'Terminar esse desafio',
-        description: 'Desafio da Keener',
-      ),
-      TaskViewmodel(
-        id: '3213',
-        title: 'Terminar esse desafio 2',
-        description: 'Desafio da Keener',
-      ),
-      TaskViewmodel(
-        id: 'weweqwe',
-        title: 'Terminar esse desafio 4',
-        description: 'Desafio da Keener',
-      ),
-    ];
-    // mainError = 'Algum erro ocorreu';
+    final value = await loadTasksUsecase(NoParams());
+    value.fold((failure) {
+      isLoading = false;
+      mainError = failure.message;
+    }, (tasklist) {
+      isLoading = false;
+      tasks = tasklist
+          .map((entity) => TaskViewmodel(
+                id: entity.id,
+                title: entity.title,
+                description: entity.description,
+              ))
+          .toList();
+    });
   }
 
   @action

@@ -53,6 +53,13 @@ class HomePage extends StatelessWidget {
               if (result == true) {
                 presenter.loadTasks();
               }
+            } else if (page.startsWith('/task')) {
+              const startRouteName = '/task';
+              try {
+                final apprendiceId = page.substring(startRouteName.length + 1);
+                Navigator.pushNamed(context, startRouteName,
+                    arguments: apprendiceId);
+              } catch (_) {}
             } else {
               Navigator.of(context).pushNamed(page);
             }

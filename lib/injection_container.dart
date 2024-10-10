@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -11,6 +12,9 @@ import 'features/home/data/repositories/logout_repository_impl.dart';
 import 'features/home/domain/repositories/logout_repository.dart';
 import 'features/home/domain/usecases/logout.dart';
 import 'features/home/presentation/presenters/mobx_home_presenter.dart';
+import 'features/new_task/data/datasources/create_task_remote_datasource.dart';
+import 'features/new_task/data/repositories/create_task_repository_impl.dart';
+import 'features/new_task/domain/repositories/create_task_repository.dart';
 import 'features/new_task/domain/usecases/create_task.dart';
 import 'features/new_task/presentation/presenters/mobx_new_task_presenter.dart';
 import 'features/signin/data/datasources/add_account_remote_datasource.dart';
@@ -49,6 +53,8 @@ class AppModule extends Module {
             AddAccountImp(repository: Modular.get<AddAccountRepository>())),
         Bind<Logout>(
             (_) => LogoutImp(repository: Modular.get<LogoutRepository>())),
+        Bind<CreateTask>((_) =>
+            CreateTaskImp(repository: Modular.get<CreateTaskRepository>())),
 
         // repositories
         Bind<CheckHasLoggedUserRepository>((_) =>
@@ -63,6 +69,9 @@ class AppModule extends Module {
         Bind<LogoutRepository>((_) => LogoutRepositoryImpl(
             dataSource: Modular.get<LogoutRemoteDataSource>())),
 
+        Bind<CreateTaskRepository>((_) => CreateTaskRepositoryImpl(
+            dataSource: Modular.get<CreateTaskRemoteDataSource>())),
+
         // datasources
 
         Bind<CheckHasLoggedUserRemoteDataSource>((_) =>
@@ -75,9 +84,13 @@ class AppModule extends Module {
             AddAccountRemoteDataSourceFirebase(Modular.get<FirebaseAuth>())),
         Bind<LogoutRemoteDataSource>(
             (_) => LogoutRemoteDataSourceFirebase(Modular.get<FirebaseAuth>())),
+        Bind<CreateTaskRemoteDataSource>((_) =>
+            CreateTaskRemoteDataSourceFirebase(
+                firestore: Modular.get<FirebaseFirestore>(),
+                firebaseInstance: Modular.get<FirebaseAuth>())),
 
         // extenals
-
         Bind<FirebaseAuth>((_) => FirebaseAuth.instance),
+        Bind<FirebaseFirestore>((_) => FirebaseFirestore.instance),
       ];
 }

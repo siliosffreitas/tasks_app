@@ -37,6 +37,7 @@ dependencies:
   dartz:
   mobx: 
   flutter_mobx: 
+  cloud_firestore: 3.3.0
   
 
   # The following adds the Cupertino Icons font to your application.

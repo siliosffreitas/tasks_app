@@ -1,5 +1,5 @@
 import 'package:mobx/mobx.dart';
-import 'package:tasks_app/core/usecases/usecase.dart';
+import '../../../../core/usecases/usecase.dart';
 
 import '../../domain/usecases/check_has_logged_user.dart';
 

@@ -1,6 +1,6 @@
 import 'package:mobx/mobx.dart';
-import 'package:tasks_app/core/usecases/usecase.dart';
 
+import '../../../../core/usecases/usecase.dart';
 import '../../domain/usecases/logout.dart';
 import '../ui/task_viewmodel.dart';
 

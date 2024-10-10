@@ -1,4 +1,4 @@
-import 'package:tasks_app/core/error/failures.dart';
+import '../../../../core/error/failures.dart';
 
 import 'package:dartz/dartz.dart';
 

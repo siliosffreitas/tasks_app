@@ -1,7 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:http/http.dart';
-import 'package:tasks_app/features/signin/domain/usecases/add_account.dart';
 
 import 'features/auth/data/datasources/authentication_remote_datasource.dart';
 import 'features/auth/data/repositories/authentication_repository_impl.dart';
@@ -16,6 +14,7 @@ import 'features/home/presentation/presenters/mobx_home_presenter.dart';
 import 'features/signin/data/datasources/add_account_remote_datasource.dart';
 import 'features/signin/data/repositories/add_account_repository_impl.dart';
 import 'features/signin/domain/repositories/add_account_repository.dart';
+import 'features/signin/domain/usecases/add_account.dart';
 import 'features/signin/presentation/presenters/mobx_signin_presenter.dart';
 import 'features/splash/data/datasources/check_has_logged_user_remote_datasource.dart';
 import 'features/splash/data/repositories/check_has_logged_user_repository_impl.dart';
@@ -63,8 +62,7 @@ class AppModule extends Module {
             dataSource: Modular.get<LogoutRemoteDataSource>())),
 
         // datasources
-        // Bind<AuthenticationRemoteDataSource>(
-        //     (_) => AuthenticationRemoteDataSourceImp(Modular.get<Client>())),
+
         Bind<CheckHasLoggedUserRemoteDataSource>((_) =>
             CheckHasLoggedUserRemoteDataSourceFirebase(
                 Modular.get<FirebaseAuth>())),
@@ -77,7 +75,7 @@ class AppModule extends Module {
             (_) => LogoutRemoteDataSourceFirebase(Modular.get<FirebaseAuth>())),
 
         // extenals
-        // Bind<Client>((_) => Client()),
+
         Bind<FirebaseAuth>((_) => FirebaseAuth.instance),
       ];
 }

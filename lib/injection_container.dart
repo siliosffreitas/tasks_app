@@ -8,6 +8,8 @@ import 'features/auth/data/repositories/authentication_repository_impl.dart';
 import 'features/auth/domain/repositories/authentication_repository.dart';
 import 'features/auth/domain/usecases/authentication.dart';
 import 'features/auth/presentation/presenters/mobx_login_presenter.dart';
+import 'features/signin/data/datasources/add_account_remote_datasource.dart';
+import 'features/signin/data/repositories/add_account_repository_impl.dart';
 import 'features/signin/domain/repositories/add_account_repository.dart';
 import 'features/signin/presentation/presenters/mobx_signin_presenter.dart';
 
@@ -30,6 +32,9 @@ class AppModule extends Module {
         // repositories
         Bind<AuthenticationRepository>((_) => AuthenticationRepositoryImp(
             remoteDataSource: Modular.get<AuthenticationRemoteDataSource>())),
+        Bind<AddAccountRepository>((_) => AddAccountRepositoryImp(
+            remoteDataSource:
+                Modular.get<AddAccountRemoteDataSourceFirebase>())),
 
         // datasources
         // Bind<AuthenticationRemoteDataSource>(
@@ -37,6 +42,8 @@ class AppModule extends Module {
         Bind<AuthenticationRemoteDataSource>((_) =>
             AuthenticationRemoteDataSourceFirebase(
                 Modular.get<FirebaseAuth>())),
+        Bind<AddAccountRemoteDataSource>((_) =>
+            AddAccountRemoteDataSourceFirebase(Modular.get<FirebaseAuth>())),
 
         // extenals
         // Bind<Client>((_) => Client()),

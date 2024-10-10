@@ -86,21 +86,17 @@ abstract class _MobxSignPresenter with Store {
     navigateTo = null;
     isLoading = true;
     await Future.delayed(const Duration(seconds: 2));
-    // final value = await usecase(AuthenticationParams(
-    //   username: username!,
-    //   password: password!,
-    // ));
-    // value.fold((failure) {
-    //   isLoading = false;
-    //   mainError = failure.message;
-    // }, (account) {
-    //   isLoading = false;
-    //   navigateTo = '/home';
-    // });
-
-    isLoading = false;
-    navigateTo = '/success';
-    // mainError = 'Teste Error';
+    final value = await usecase(AddAccountParams(
+      username: username!,
+      password: password!,
+    ));
+    value.fold((failure) {
+      isLoading = false;
+      mainError = failure.message;
+    }, (account) {
+      isLoading = false;
+      navigateTo = '/success';
+    });
   }
 
   @action

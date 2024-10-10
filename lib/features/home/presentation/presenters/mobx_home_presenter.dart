@@ -1,5 +1,7 @@
 import 'package:mobx/mobx.dart';
+import 'package:tasks_app/core/usecases/usecase.dart';
 
+import '../../domain/usecases/logout.dart';
 import '../ui/task_viewmodel.dart';
 
 part 'mobx_home_presenter.g.dart';
@@ -7,6 +9,7 @@ part 'mobx_home_presenter.g.dart';
 class MobxHomePresenter = _MobxHomePresenter with _$MobxHomePresenter;
 
 abstract class _MobxHomePresenter with Store {
+  final Logout logoutUsecase;
   @observable
   String? mainError;
 
@@ -18,6 +21,8 @@ abstract class _MobxHomePresenter with Store {
 
   @observable
   List<TaskViewmodel> tasks = [];
+
+  _MobxHomePresenter({required this.logoutUsecase});
 
   @action
   void goToTaskPage(String id) {
@@ -68,7 +73,11 @@ abstract class _MobxHomePresenter with Store {
   }
 
   @action
-  void logout() {
+  Future<void> logout() async {
+    isLoading = true;
+    await Future.delayed(const Duration(seconds: 2));
+    await logoutUsecase(NoParams());
+    isLoading = true;
     navigateTo = null;
     navigateTo = '/login';
   }

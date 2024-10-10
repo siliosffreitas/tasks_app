@@ -1,16 +1,16 @@
 import 'package:mobx/mobx.dart';
 
 import '../../../../core/utils/validators.dart';
+import '../../domain/usecases/add_account.dart';
 
 part 'mobx_signin_presenter.g.dart';
 
 class MobxSigninPresenter = _MobxSignPresenter with _$MobxSigninPresenter;
 
 abstract class _MobxSignPresenter with Store {
-  // final Authentication usecase;
+  final AddAccount usecase;
 
-  _MobxSignPresenter(//{required this.usecase}
-      );
+  _MobxSignPresenter({required this.usecase});
 
   @computed
   String get usernameError => username == null

@@ -1,7 +1,7 @@
 import 'package:mobx/mobx.dart';
 
 import '../../../../core/utils/validators.dart';
-import '../../domain/usecases/index.dart';
+import '../../domain/usecases/authentication.dart';
 
 part 'mobx_login_presenter.g.dart';
 

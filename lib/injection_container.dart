@@ -50,7 +50,8 @@ class AppModule extends Module {
         Bind<MobxSplashPresenter>(
             (_) => MobxSplashPresenter(Modular.get<CheckHasLoggedUser>())),
         Bind<MobxLoginPresenter>(
-            (_) => MobxLoginPresenter(usecase: Modular.get<Authentication>())),
+            (_) => MobxLoginPresenter(usecase: Modular.get<Authentication>()),
+            isSingleton: false),
         Bind<MobxSigninPresenter>(
             (_) => MobxSigninPresenter(usecase: Modular.get<AddAccount>())),
         Bind<MobxHomePresenter>((_) => MobxHomePresenter(

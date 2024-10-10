@@ -17,6 +17,7 @@ class CreateTaskRemoteDataSourceFirebase implements CreateTaskRemoteDataSource {
       'title': title,
       'description': description,
       'user': firebaseInstance.currentUser!.uid,
+      'created_at': DateTime.now()
     });
   }
 }

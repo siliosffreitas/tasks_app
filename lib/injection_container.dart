@@ -150,6 +150,6 @@ class AppModule extends Module {
         ChildRoute('/task',
             child: (context, args) => TaskPage(
                 presenter: Modular.get<MobxTaskPresenter>(),
-                taskId: args as String)),
+                taskId: args.data['task_id'])),
       ];
 }

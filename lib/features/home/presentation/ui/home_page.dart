@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../../core/ui/components/index.dart';
 import '../presenters/mobx_home_presenter.dart';
@@ -41,9 +42,9 @@ class HomePage extends StatelessWidget {
               showConfirmationMessage(
                   context, 'Deseja realmente fazer logout?', presenter.logout);
             } else if (page == '/login') {
-              Navigator.of(context).pushNamedAndRemoveUntil(page, (_) => false);
+              Modular.to.pushNamedAndRemoveUntil(page, (_) => false);
             } else if (page == '/new_task') {
-              final result = await Navigator.of(context).pushNamed(page);
+              final result = await Modular.to.pushNamed(page);
               if (result == true) {
                 presenter.loadTasks();
               }
@@ -51,11 +52,12 @@ class HomePage extends StatelessWidget {
               const startRouteName = '/task';
               try {
                 final apprendiceId = page.substring(startRouteName.length + 1);
-                Navigator.pushNamed(context, startRouteName,
-                    arguments: apprendiceId);
+                Modular.to.pushNamed(startRouteName, arguments: {
+                  'task_id': apprendiceId,
+                });
               } catch (_) {}
             } else {
-              Navigator.of(context).pushNamed(page);
+              Modular.to.pushNamed(page);
             }
           }
         });

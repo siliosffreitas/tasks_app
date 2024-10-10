@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../../../core/ui/mixins/index.dart';
 import '../../../../core/ui/components/index.dart';
@@ -37,9 +38,9 @@ class NewTaskPage extends StatelessWidget with LoadingManager, UiErrorManager {
             String page = presenter.navigateTo!;
 
             if (page == '/success') {
-              Navigator.of(context).pop(true);
+              Modular.to.pop(true);
             } else {
-              Navigator.of(context).pushNamed(page);
+              Modular.to.pushNamed(page);
             }
           }
         });

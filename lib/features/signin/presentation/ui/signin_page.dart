@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../../../core/ui/mixins/index.dart';
 import '../../../../core/ui/components/index.dart';
@@ -36,7 +37,7 @@ class SigninPage extends StatelessWidget with LoadingManager, UiErrorManager {
               presenter.navigateTo!.isNotEmpty) {
             String page = presenter.navigateTo!;
             if (page == '/home') {
-              Navigator.of(context).pushNamedAndRemoveUntil(page, (_) => false);
+              Modular.to.pushNamedAndRemoveUntil(page, (_) => false);
             } else if (page == '/success') {
               showMessage(
                 context,
@@ -49,7 +50,7 @@ class SigninPage extends StatelessWidget with LoadingManager, UiErrorManager {
                 'Para ter uma senha forte, você precisa digitar:\n• Pelo menos 8 caracteres\n• Pelo menos 1 letra maiúscula\n• Pelo menos 1 letra minúscula\n• Pelo menos 1 número\n• Pelo menos 1 caractere especial',
               );
             } else {
-              Navigator.of(context).pushNamed(page);
+              Modular.to.pushNamed(page);
             }
           }
         });

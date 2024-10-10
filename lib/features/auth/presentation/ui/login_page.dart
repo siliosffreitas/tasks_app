@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../../../core/ui/mixins/index.dart';
 import '../../../../core/ui/components/index.dart';
@@ -33,9 +34,9 @@ class LoginPage extends StatelessWidget with LoadingManager, UiErrorManager {
               presenter.navigateTo!.isNotEmpty) {
             String page = presenter.navigateTo!;
             if (page == '/home') {
-              Navigator.of(context).pushNamedAndRemoveUntil(page, (_) => false);
+              Modular.to.pushNamedAndRemoveUntil(page, (_) => false);
             } else {
-              Navigator.of(context).pushNamed(page);
+              Modular.to.pushNamed(page);
             }
           }
         });

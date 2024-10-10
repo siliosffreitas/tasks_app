@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../presenters/mobx_splash_presenter.dart';
 
@@ -17,7 +18,7 @@ class SplashPage extends StatelessWidget {
           if (presenter.navigateTo != null &&
               presenter.navigateTo!.isNotEmpty) {
             String page = presenter.navigateTo!;
-            Navigator.of(context).pushNamedAndRemoveUntil(page, (_) => false);
+            Modular.to.pushNamedAndRemoveUntil(page, (_) => false);
           }
         });
 

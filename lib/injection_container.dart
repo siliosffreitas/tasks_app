@@ -8,6 +8,7 @@ import 'features/auth/data/repositories/authentication_repository_impl.dart';
 import 'features/auth/domain/repositories/authentication_repository.dart';
 import 'features/auth/domain/usecases/authentication.dart';
 import 'features/auth/presentation/presenters/mobx_login_presenter.dart';
+import 'features/home/domain/repositories/logout_repository.dart';
 import 'features/home/domain/usecases/logout.dart';
 import 'features/home/presentation/presenters/mobx_home_presenter.dart';
 import 'features/signin/data/datasources/add_account_remote_datasource.dart';
@@ -43,6 +44,8 @@ class AppModule extends Module {
             repository: Modular.get<AuthenticationRepository>())),
         Bind<AddAccount>((_) =>
             AddAccountImp(repository: Modular.get<AddAccountRepository>())),
+        Bind<Logout>(
+            (_) => LogoutImp(repository: Modular.get<LogoutRepository>())),
 
         // repositories
         Bind<CheckHasLoggedUserRepository>((_) =>

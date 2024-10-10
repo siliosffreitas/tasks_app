@@ -12,6 +12,7 @@ import 'features/signin/data/datasources/add_account_remote_datasource.dart';
 import 'features/signin/data/repositories/add_account_repository_impl.dart';
 import 'features/signin/domain/repositories/add_account_repository.dart';
 import 'features/signin/presentation/presenters/mobx_signin_presenter.dart';
+import 'features/splash/domain/repositories/check_has_logged_user_repository.dart';
 import 'features/splash/domain/usecases/check_has_logged_user.dart';
 import 'features/splash/presentation/presenters/mobx_splash_presenter.dart';
 
@@ -28,6 +29,9 @@ class AppModule extends Module {
             (_) => MobxSigninPresenter(usecase: Modular.get<AddAccount>())),
 
         // usecases
+        Bind<CheckHasLoggedUser>((_) => CheckHasLoggedUserImp(
+            repository: Modular.get<CheckHasLoggedUserRepository>())),
+
         Bind<Authentication>((_) => AuthenticationImp(
             repository: Modular.get<AuthenticationRepository>())),
         Bind<AddAccount>((_) =>

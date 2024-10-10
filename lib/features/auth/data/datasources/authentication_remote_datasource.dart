@@ -27,6 +27,8 @@ class AuthenticationRemoteDataSourceFirebase
       } else {
         throw ServerException(e.message ?? 'Algo deu errado');
       }
+    } catch (e) {
+      throw ServerException('Algo deu errado');
     }
   }
 }

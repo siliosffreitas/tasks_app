@@ -1,10 +1,8 @@
-import 'package:tasks_app/features/home/domain/entities/task_entity.dart';
-
-import 'package:tasks_app/core/error/failures.dart';
-
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/exceptions.dart';
+import '../../../../core/error/failures.dart';
+import '../../../home/domain/entities/task_entity.dart';
 import '../../domain/reposirory/load_task_repository.dart';
 import '../datasources/load_task_remote_datasource.dart';
 

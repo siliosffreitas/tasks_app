@@ -1,7 +1,6 @@
-import '../../../../core/error/failures.dart';
-
 import 'package:dartz/dartz.dart';
 
+import '../../../../core/error/failures.dart';
 import '../../../../core/usecases/usecase.dart';
 import '../../../auth/domain/entities/account_entity.dart';
 import '../repositories/check_has_logged_user_repository.dart';

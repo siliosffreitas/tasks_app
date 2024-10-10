@@ -1,6 +1,6 @@
-import 'package:tasks_app/features/home/domain/entities/task_entity.dart';
+import '../../domain/entities/task_entity.dart';
 
-import 'package:tasks_app/core/error/failures.dart';
+import '../../../../core/error/failures.dart';
 
 import 'package:dartz/dartz.dart';
 

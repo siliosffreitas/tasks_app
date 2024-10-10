@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../../core/error/exceptions.dart';
-
 import '../../../auth/data/models/account_model.dart';
 
 abstract class AddAccountRemoteDataSource {

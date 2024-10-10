@@ -99,7 +99,7 @@ class LoginPage extends StatelessWidget with LoadingManager, UiErrorManager {
                       ),
                       TextButton(
                         onPressed: presenter.goToSigninPage,
-                        child: Text(
+                        child: const Text(
                           'Criar conta',
                           style: TextStyle(color: Colors.black),
                         ),

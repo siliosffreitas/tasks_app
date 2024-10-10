@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:tasks_app/features/home/domain/entities/task_entity.dart';
+import '../entities/task_entity.dart';
 
 import '../../../../core/error/failures.dart';
 

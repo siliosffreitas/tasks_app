@@ -1,8 +1,8 @@
-import 'package:tasks_app/core/error/failures.dart';
 import 'package:dartz/dartz.dart';
-import 'package:tasks_app/features/home/domain/entities/task_entity.dart';
 
+import '../../../../core/error/failures.dart';
 import '../../../../core/usecases/usecase.dart';
+import '../entities/task_entity.dart';
 import '../repositories/load_tasks_repository.dart';
 
 abstract class LoadTasks implements UseCase<List<TaskEntity>, NoParams> {}

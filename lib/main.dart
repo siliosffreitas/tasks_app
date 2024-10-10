@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -7,10 +8,12 @@ import 'features/auth/presentation/ui/login_page.dart';
 import 'features/home/presentation/ui/home_page.dart';
 import 'injection_container.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   return runApp(ModularApp(
     module: AppModule(),
-    child: MyApp(),
+    child: const MyApp(),
   ));
 }
 

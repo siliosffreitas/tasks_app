@@ -12,6 +12,8 @@ import 'features/signin/data/datasources/add_account_remote_datasource.dart';
 import 'features/signin/data/repositories/add_account_repository_impl.dart';
 import 'features/signin/domain/repositories/add_account_repository.dart';
 import 'features/signin/presentation/presenters/mobx_signin_presenter.dart';
+import 'features/splash/data/datasources/add_account_remote_datasource.dart';
+import 'features/splash/data/repositories/check_has_logged_user_repository_impl.dart';
 import 'features/splash/domain/repositories/check_has_logged_user_repository.dart';
 import 'features/splash/domain/usecases/check_has_logged_user.dart';
 import 'features/splash/presentation/presenters/mobx_splash_presenter.dart';
@@ -38,6 +40,10 @@ class AppModule extends Module {
             AddAccountImp(repository: Modular.get<AddAccountRepository>())),
 
         // repositories
+        Bind<CheckHasLoggedUserRepository>((_) =>
+            CheckHasLoggedUserRepositoryImp(
+                remoteDataSource:
+                    Modular.get<CheckHasLoggedUserRemoteDataSource>())),
         Bind<AuthenticationRepository>((_) => AuthenticationRepositoryImp(
             remoteDataSource: Modular.get<AuthenticationRemoteDataSource>())),
         Bind<AddAccountRepository>((_) => AddAccountRepositoryImp(

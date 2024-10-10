@@ -9,6 +9,7 @@ import 'features/auth/domain/usecases/authentication.dart';
 import 'features/auth/presentation/presenters/mobx_login_presenter.dart';
 import 'features/home/data/datasources/logout_remote_datasource.dart';
 import 'features/home/data/repositories/logout_repository_impl.dart';
+import 'features/home/domain/repositories/load_tasks_repository.dart';
 import 'features/home/domain/repositories/logout_repository.dart';
 import 'features/home/domain/usecases/load_tasks.dart';
 import 'features/home/domain/usecases/logout.dart';
@@ -58,6 +59,8 @@ class AppModule extends Module {
             (_) => LogoutImp(repository: Modular.get<LogoutRepository>())),
         Bind<CreateTask>((_) =>
             CreateTaskImp(repository: Modular.get<CreateTaskRepository>())),
+        Bind<LoadTasks>((_) =>
+            LoadTasksImp(repository: Modular.get<LoadTasksRepository>())),
 
         // repositories
         Bind<CheckHasLoggedUserRepository>((_) =>

@@ -54,6 +54,16 @@ class LoginPage extends StatelessWidget with LoadingManager, UiErrorManager {
                     ),
                   ),
                   alignment: Alignment.center,
+                  child: const Center(
+                    child: Text(
+                      'Bem-vindo ao Lista de tarefas by Silio',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(40),

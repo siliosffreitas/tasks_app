@@ -13,7 +13,7 @@ abstract class _MobxLoginPresenter with Store {
   _MobxLoginPresenter({required this.usecase});
 
   @computed
-  String get usernameError => username == null
+  String? get usernameError => username == null
       ? ''
       : username!.isEmpty
           ? 'E-mail obrigatório'
@@ -22,14 +22,14 @@ abstract class _MobxLoginPresenter with Store {
               : 'E-mail inválido';
 
   @computed
-  String get passwordError => password == null
+  String? get passwordError => password == null
       ? ''
       : password!.isEmpty
           ? 'Senha obrigatória'
           : '';
 
   @computed
-  bool get isFormValid =>
+  bool? get isFormValid =>
       username != null &&
       username!.isNotEmpty &&
       isEmailValid(username!) &&

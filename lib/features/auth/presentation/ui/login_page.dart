@@ -78,7 +78,7 @@ class LoginPage extends StatelessWidget with LoadingManager, UiErrorManager {
                         builder: (_) => TextFormField(
                           decoration: InputDecoration(
                             hintText: 'E-mail',
-                            errorText: presenter.usernameError.isEmpty == true
+                            errorText: presenter.usernameError?.isEmpty == true
                                 ? null
                                 : presenter.usernameError,
                           ),
@@ -92,7 +92,7 @@ class LoginPage extends StatelessWidget with LoadingManager, UiErrorManager {
                         builder: (_) => TextFormField(
                           decoration: InputDecoration(
                             hintText: 'Senha',
-                            errorText: presenter.passwordError.isEmpty == true
+                            errorText: presenter.passwordError?.isEmpty == true
                                 ? null
                                 : presenter.passwordError,
                           ),

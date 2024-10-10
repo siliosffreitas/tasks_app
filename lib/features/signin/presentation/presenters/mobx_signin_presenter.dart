@@ -47,7 +47,10 @@ abstract class _MobxSignPresenter with Store {
       password != null &&
       password!.isNotEmpty &&
       passwordConfirmation != null &&
-      passwordConfirmation!.isNotEmpty;
+      passwordConfirmation!.isNotEmpty &&
+      usernameError == '' &&
+      passwordError == '' &&
+      passwordConfirmationError == '';
 
   @observable
   bool isLoading = false;

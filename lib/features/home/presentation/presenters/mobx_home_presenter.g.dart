@@ -81,6 +81,14 @@ mixin _$MobxHomePresenter on _MobxHomePresenter, Store {
     return _$loadTasksAsyncAction.run(() => super.loadTasks());
   }
 
+  late final _$logoutAsyncAction =
+      AsyncAction('_MobxHomePresenter.logout', context: context);
+
+  @override
+  Future<void> logout() {
+    return _$logoutAsyncAction.run(() => super.logout());
+  }
+
   late final _$_MobxHomePresenterActionController =
       ActionController(name: '_MobxHomePresenter', context: context);
 
@@ -101,6 +109,17 @@ mixin _$MobxHomePresenter on _MobxHomePresenter, Store {
         name: '_MobxHomePresenter.goToNewTaskPage');
     try {
       return super.goToNewTaskPage();
+    } finally {
+      _$_MobxHomePresenterActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void showConfirmationLogout() {
+    final _$actionInfo = _$_MobxHomePresenterActionController.startAction(
+        name: '_MobxHomePresenter.showConfirmationLogout');
+    try {
+      return super.showConfirmationLogout();
     } finally {
       _$_MobxHomePresenterActionController.endAction(_$actionInfo);
     }

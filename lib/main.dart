@@ -11,10 +11,12 @@ import 'features/auth/presentation/presenters/mobx_login_presenter.dart';
 import 'features/auth/presentation/ui/login_page.dart';
 import 'features/home/presentation/presenters/mobx_home_presenter.dart';
 import 'features/home/presentation/ui/home_page.dart';
+import 'features/new_task/presentation/presenters/mobx_new_task_presenter.dart';
+import 'features/new_task/presentation/ui/new_task_page.dart';
 import 'features/signin/presentation/presenters/mobx_signin_presenter.dart';
 import 'features/signin/presentation/ui/signin_page.dart';
 import 'features/splash/presentation/presenters/mobx_splash_presenter.dart';
-import 'features/splash/presentation/splash_page.dart';
+import 'features/splash/presentation/ui/splash_page.dart';
 import 'injection_container.dart';
 
 Future<void> main() async {
@@ -63,6 +65,11 @@ class MyApp extends StatelessWidget {
       case '/home':
         return _buildPage(HomePage(
           presenter: Modular.get<MobxHomePresenter>(),
+        ));
+
+      case '/new_task':
+        return _buildPage(NewTaskPage(
+          presenter: Modular.get<MobxNewTaskPresenter>(),
         ));
 
       default:

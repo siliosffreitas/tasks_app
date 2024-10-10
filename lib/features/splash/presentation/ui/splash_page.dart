@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 
-import 'presenters/mobx_splash_presenter.dart';
+import '../presenters/mobx_splash_presenter.dart';
 
 class SplashPage extends StatelessWidget {
   final MobxSplashPresenter presenter;

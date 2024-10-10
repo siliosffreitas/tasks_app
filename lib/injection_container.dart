@@ -11,6 +11,7 @@ import 'features/home/data/repositories/logout_repository_impl.dart';
 import 'features/home/domain/repositories/logout_repository.dart';
 import 'features/home/domain/usecases/logout.dart';
 import 'features/home/presentation/presenters/mobx_home_presenter.dart';
+import 'features/new_task/domain/usecases/create_task.dart';
 import 'features/new_task/presentation/presenters/mobx_new_task_presenter.dart';
 import 'features/signin/data/datasources/add_account_remote_datasource.dart';
 import 'features/signin/data/repositories/add_account_repository_impl.dart';
@@ -35,7 +36,8 @@ class AppModule extends Module {
             (_) => MobxSigninPresenter(usecase: Modular.get<AddAccount>())),
         Bind<MobxHomePresenter>(
             (_) => MobxHomePresenter(logoutUsecase: Modular.get<Logout>())),
-        Bind<MobxNewTaskPresenter>((_) => MobxNewTaskPresenter()),
+        Bind<MobxNewTaskPresenter>(
+            (_) => MobxNewTaskPresenter(usecase: Modular.get<CreateTask>())),
 
         // usecases
         Bind<CheckHasLoggedUser>((_) => CheckHasLoggedUserImp(

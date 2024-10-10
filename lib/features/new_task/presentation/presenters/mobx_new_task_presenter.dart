@@ -1,15 +1,15 @@
 import 'package:mobx/mobx.dart';
 
+import '../../domain/usecases/create_task.dart';
+
 part 'mobx_new_task_presenter.g.dart';
 
 class MobxNewTaskPresenter = _MobxNewTaskPresenter with _$MobxNewTaskPresenter;
 
 abstract class _MobxNewTaskPresenter with Store {
-  // final Authentication usecase;
+  final CreateTask usecase;
 
-  _MobxNewTaskPresenter(
-      // {required this.usecase}
-      );
+  _MobxNewTaskPresenter({required this.usecase});
 
   @computed
   String get titleError => title == null
@@ -19,9 +19,9 @@ abstract class _MobxNewTaskPresenter with Store {
           : '';
 
   @computed
-  String get descriptionError => desciption == null
+  String get descriptionError => description == null
       ? ''
-      : desciption!.isEmpty
+      : description!.isEmpty
           ? 'Descrição obrigatória'
           : '';
 
@@ -29,8 +29,8 @@ abstract class _MobxNewTaskPresenter with Store {
   bool get isFormValid =>
       title != null &&
       title!.isNotEmpty &&
-      desciption != null &&
-      desciption!.isNotEmpty;
+      description != null &&
+      description!.isNotEmpty;
 
   @observable
   bool isLoading = false;
@@ -45,7 +45,7 @@ abstract class _MobxNewTaskPresenter with Store {
   String? title;
 
   @observable
-  String? desciption;
+  String? description;
 
   @action
   void validateTitle(String title) {
@@ -53,8 +53,8 @@ abstract class _MobxNewTaskPresenter with Store {
   }
 
   @action
-  void validateDescription(String desciption) {
-    this.desciption = desciption;
+  void validateDescription(String description) {
+    this.description = description;
   }
 
   @action
@@ -62,16 +62,16 @@ abstract class _MobxNewTaskPresenter with Store {
     mainError = null;
     navigateTo = null;
     isLoading = true;
-    // final value = await usecase(AuthenticationParams(
-    //   username: username!,
-    //   password: password!,
-    // ));
-    // value.fold((failure) {
-    //   isLoading = false;
-    //   mainError = failure.message;
-    // }, (account) {
-    //   isLoading = false;
-    //   navigateTo = '/home';
-    // });
+    final value = await usecase(CreateTaskParams(
+      title: title!,
+      description: description!,
+    ));
+    value.fold((failure) {
+      isLoading = false;
+      mainError = failure.message;
+    }, (account) {
+      isLoading = false;
+      navigateTo = '/success';
+    });
   }
 }

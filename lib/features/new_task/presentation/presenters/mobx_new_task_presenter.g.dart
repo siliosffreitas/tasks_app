@@ -99,15 +99,15 @@ mixin _$MobxNewTaskPresenter on _MobxNewTaskPresenter, Store {
       Atom(name: '_MobxNewTaskPresenter.desciption', context: context);
 
   @override
-  String? get desciption {
+  String? get description {
     _$desciptionAtom.reportRead();
-    return super.desciption;
+    return super.description;
   }
 
   @override
-  set desciption(String? value) {
-    _$desciptionAtom.reportWrite(value, super.desciption, () {
-      super.desciption = value;
+  set description(String? value) {
+    _$desciptionAtom.reportWrite(value, super.description, () {
+      super.description = value;
     });
   }
 
@@ -151,7 +151,7 @@ isLoading: ${isLoading},
 mainError: ${mainError},
 navigateTo: ${navigateTo},
 title: ${title},
-desciption: ${desciption},
+desciption: ${description},
 titleError: ${titleError},
 descriptionError: ${descriptionError},
 isFormValid: ${isFormValid}

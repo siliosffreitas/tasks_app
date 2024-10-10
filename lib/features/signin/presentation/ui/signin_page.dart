@@ -37,6 +37,12 @@ class SigninPage extends StatelessWidget with LoadingManager, UiErrorManager {
             String page = presenter.navigateTo!;
             if (page == '/home') {
               Navigator.of(context).pushNamedAndRemoveUntil(page, (_) => false);
+            } else if (page == '/success') {
+              showMessage(
+                context,
+                'Conta criada com sucesso, viu como foi fácil, entra aí',
+                onClose: () => presenter.goHome(),
+              );
             } else {
               Navigator.of(context).pushNamed(page);
             }

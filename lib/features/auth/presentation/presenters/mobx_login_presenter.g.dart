@@ -145,6 +145,17 @@ mixin _$MobxLoginPresenter on _MobxLoginPresenter, Store {
   }
 
   @override
+  void goToSigninPage() {
+    final _$actionInfo = _$_MobxLoginPresenterActionController.startAction(
+        name: '_MobxLoginPresenter.goToSigninPage');
+    try {
+      return super.goToSigninPage();
+    } finally {
+      _$_MobxLoginPresenterActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 isLoading: ${isLoading},

@@ -181,6 +181,17 @@ mixin _$MobxSigninPresenter on _MobxSignPresenter, Store {
   }
 
   @override
+  void goHome() {
+    final _$actionInfo = _$_MobxSignPresenterActionController.startAction(
+        name: '_MobxSignPresenter.goHome');
+    try {
+      return super.goHome();
+    } finally {
+      _$_MobxSignPresenterActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 isLoading: ${isLoading},

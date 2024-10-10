@@ -16,9 +16,10 @@ void showMessage(
         actions: <Widget>[
           TextButton(
             child: const Text('OK'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
+            onPressed: onClose ??
+                () {
+                  Navigator.of(context).pop();
+                },
           ),
         ],
       );

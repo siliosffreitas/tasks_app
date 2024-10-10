@@ -99,6 +99,13 @@ abstract class _MobxSignPresenter with Store {
     // });
 
     isLoading = false;
-    mainError = 'Teste Error';
+    navigateTo = '/success';
+    // mainError = 'Teste Error';
+  }
+
+  @action
+  void goHome() {
+    navigateTo = null;
+    navigateTo = '/home';
   }
 }

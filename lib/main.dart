@@ -9,6 +9,7 @@ import 'core/ui/components/app_theme.dart';
 import 'core/ui/components/coming_soon_page.dart';
 import 'features/auth/presentation/presenters/mobx_login_presenter.dart';
 import 'features/auth/presentation/ui/login_page.dart';
+import 'features/home/presentation/presenters/mobx_home_presenter.dart';
 import 'features/home/presentation/ui/home_page.dart';
 import 'features/signin/presentation/presenters/mobx_signin_presenter.dart';
 import 'features/signin/presentation/ui/signin_page.dart';
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      initialRoute: '/login',
+      initialRoute: '/home',
       theme: makeDefaultAppTheme,
       onGenerateRoute: _onGenerateRoute,
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
@@ -55,7 +56,9 @@ class MyApp extends StatelessWidget {
             SigninPage(presenter: Modular.get<MobxSigninPresenter>()));
 
       case '/home':
-        return _buildPage(HomePage());
+        return _buildPage(HomePage(
+          presenter: Modular.get<MobxHomePresenter>(),
+        ));
 
       default:
         return _buildPage(const ComingSoonPage());

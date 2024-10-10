@@ -8,6 +8,7 @@ import 'features/auth/data/repositories/authentication_repository_impl.dart';
 import 'features/auth/domain/repositories/authentication_repository.dart';
 import 'features/auth/domain/usecases/authentication.dart';
 import 'features/auth/presentation/presenters/mobx_login_presenter.dart';
+import 'features/home/presentation/presenters/mobx_home_presenter.dart';
 import 'features/signin/data/datasources/add_account_remote_datasource.dart';
 import 'features/signin/data/repositories/add_account_repository_impl.dart';
 import 'features/signin/domain/repositories/add_account_repository.dart';
@@ -22,6 +23,8 @@ class AppModule extends Module {
 
         Bind<MobxSigninPresenter>(
             (_) => MobxSigninPresenter(usecase: Modular.get<AddAccount>())),
+
+        Bind<MobxHomePresenter>((_) => MobxHomePresenter()),
 
         // usecases
         Bind<Authentication>((_) => AuthenticationImp(

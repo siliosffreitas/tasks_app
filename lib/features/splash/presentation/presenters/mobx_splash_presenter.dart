@@ -1,5 +1,4 @@
 import 'package:mobx/mobx.dart';
-import 'package:tasks_app/core/error/failures.dart';
 import 'package:tasks_app/core/usecases/usecase.dart';
 
 import '../../domain/usecases/check_has_logged_user.dart';
@@ -18,7 +17,7 @@ abstract class _MobxSplashPresenter with Store {
 
   @action
   Future<void> checkLoggedUser() async {
-    // await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     final value = await usecase(NoParams());
     value.fold((failure) {
       navigateTo = '/login';

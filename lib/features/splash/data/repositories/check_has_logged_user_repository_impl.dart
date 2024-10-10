@@ -4,7 +4,7 @@ import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
 import '../../../auth/domain/entities/account_entity.dart';
 import '../../domain/repositories/check_has_logged_user_repository.dart';
-import '../datasources/add_account_remote_datasource.dart';
+import '../datasources/check_has_logged_user_remote_datasource.dart';
 
 class CheckHasLoggedUserRepositoryImp implements CheckHasLoggedUserRepository {
   final CheckHasLoggedUserRemoteDataSource remoteDataSource;

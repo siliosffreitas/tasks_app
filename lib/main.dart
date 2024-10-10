@@ -6,6 +6,8 @@ import 'core/ui/components/coming_soon_page.dart';
 import 'features/auth/presentation/presenters/mobx_login_presenter.dart';
 import 'features/auth/presentation/ui/login_page.dart';
 import 'features/home/presentation/ui/home_page.dart';
+import 'features/signin/presentation/presenters/mobx_signin_presenter.dart';
+import 'features/signin/presentation/ui/signin_page.dart';
 import 'injection_container.dart';
 
 Future<void> main() async {
@@ -37,9 +39,11 @@ class MyApp extends StatelessWidget {
   Route<dynamic>? _onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case '/login':
-        return _buildPage(LoginPage(
-          presenter: Modular.get<MobxLoginPresenter>(),
-        ));
+        return _buildPage(
+            LoginPage(presenter: Modular.get<MobxLoginPresenter>()));
+      case '/signin':
+        return _buildPage(
+            SigninPage(presenter: Modular.get<MobxSigninPresenter>()));
 
       case '/home':
         return _buildPage(HomePage());

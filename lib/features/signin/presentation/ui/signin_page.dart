@@ -4,15 +4,18 @@ import 'package:mobx/mobx.dart';
 
 import '../../../../../core/ui/mixins/index.dart';
 import '../../../../core/ui/components/index.dart';
-import '../presenters/mobx_login_presenter.dart';
+import '../presenters/mobx_signin_presenter.dart';
 
-class LoginPage extends StatelessWidget with LoadingManager, UiErrorManager {
-  final MobxLoginPresenter presenter;
-  const LoginPage({required this.presenter, Key? key}) : super(key: key);
+class SigninPage extends StatelessWidget with LoadingManager, UiErrorManager {
+  final MobxSigninPresenter presenter;
+  const SigninPage({required this.presenter, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Crie sua conta fácil'),
+      ),
       body: Builder(builder: (context) {
         reaction((_) => presenter.mainError, (_) {
           if (presenter.mainError != null) {
@@ -44,17 +47,6 @@ class LoginPage extends StatelessWidget with LoadingManager, UiErrorManager {
           child: Form(
             child: Column(
               children: [
-                Container(
-                  height: 300,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.elliptical(200, 30),
-                      bottomRight: Radius.elliptical(200, 30),
-                    ),
-                  ),
-                  alignment: Alignment.center,
-                ),
                 Padding(
                   padding: const EdgeInsets.all(40),
                   child: Column(
@@ -89,6 +81,23 @@ class LoginPage extends StatelessWidget with LoadingManager, UiErrorManager {
                           obscureText: true,
                         ),
                       ),
+                      const SizedBox(height: 20),
+                      const Text('Confirmação da Senha'),
+                      const SizedBox(height: 4),
+                      Observer(
+                        builder: (_) => TextFormField(
+                          decoration: InputDecoration(
+                            hintText: 'Confirmação da Senha',
+                            errorText:
+                                presenter.passwordConfirmationError.isEmpty ==
+                                        true
+                                    ? null
+                                    : presenter.passwordConfirmationError,
+                          ),
+                          onChanged: presenter.validatePasswordConfirmation,
+                          obscureText: true,
+                        ),
+                      ),
                       const SizedBox(height: 40),
                       Observer(
                         builder: (_) => ElevatedButton(
@@ -96,13 +105,6 @@ class LoginPage extends StatelessWidget with LoadingManager, UiErrorManager {
                                 ? presenter.auth
                                 : null,
                             child: const Text('Entrar')),
-                      ),
-                      TextButton(
-                        onPressed: presenter.goToSigninPage,
-                        child: Text(
-                          'Criar conta',
-                          style: TextStyle(color: Colors.black),
-                        ),
                       ),
                     ],
                   ),

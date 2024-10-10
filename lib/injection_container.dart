@@ -7,6 +7,7 @@ import 'features/auth/data/repositories/authentication_repository_impl.dart';
 import 'features/auth/domain/repositories/authentication_repository.dart';
 import 'features/auth/domain/usecases/authentication.dart';
 import 'features/auth/presentation/presenters/mobx_login_presenter.dart';
+import 'features/signin/presentation/presenters/mobx_signin_presenter.dart';
 
 class AppModule extends Module {
   @override
@@ -14,6 +15,10 @@ class AppModule extends Module {
         // controllers
         Bind<MobxLoginPresenter>(
             (_) => MobxLoginPresenter(usecase: Modular.get<Authentication>())),
+
+        Bind<MobxSigninPresenter>((_) => MobxSigninPresenter(
+            // usecase: Modular.get<Authentication>()
+            )),
         // usecases
         Bind<Authentication>((_) => AuthenticationImp(
             repository: Modular.get<AuthenticationRepository>())),

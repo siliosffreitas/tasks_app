@@ -62,11 +62,16 @@ abstract class _MobxLoginPresenter with Store {
   }
 
   @action
+  void goToSigninPage() {
+    navigateTo = null;
+    navigateTo = '/signin';
+  }
+
+  @action
   Future<void> auth() async {
     mainError = null;
     navigateTo = null;
     isLoading = true;
-    // await Future.delayed(const Duration(seconds: 2));
     final value = await usecase(AuthenticationParams(
       username: username!,
       password: password!,
@@ -78,7 +83,5 @@ abstract class _MobxLoginPresenter with Store {
       isLoading = false;
       navigateTo = '/home';
     });
-
-    // mainError = 'Teste Error';
   }
 }

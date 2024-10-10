@@ -37,6 +37,9 @@ class TaskPage extends StatelessWidget {
               onTryAgain: () => presenter.loadTask(taskId),
             );
           }
+          if (presenter.isLoading) {
+            return const SizedBox(height: 0);
+          }
           return SingleChildScrollView(
             child: Column(
               children: [

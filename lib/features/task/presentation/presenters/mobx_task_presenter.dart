@@ -1,14 +1,15 @@
 import 'package:mobx/mobx.dart';
 
+import '../../../../core/usecases/usecase.dart';
 import '../../../home/presentation/ui/task_viewmodel.dart';
+import '../../domain/usecases/load_task.dart';
 
 part 'mobx_task_presenter.g.dart';
 
 class MobxTaskPresenter = _MobxTaskPresenter with _$MobxTaskPresenter;
 
 abstract class _MobxTaskPresenter with Store {
-  // final Logout logoutUsecase;
-  // final LoadTasks loadTasksUsecase;
+  final LoadTask usecase;
 
   @observable
   String? mainError;
@@ -22,12 +23,9 @@ abstract class _MobxTaskPresenter with Store {
   @observable
   TaskViewmodel? task;
 
-  _MobxTaskPresenter(
-      // {
-      // required this.logoutUsecase,
-      // required this.loadTasksUsecase,
-      // }
-      );
+  _MobxTaskPresenter({
+    required this.usecase,
+  });
 
   @action
   Future<void> loadTask(String taskId) async {
@@ -37,22 +35,18 @@ abstract class _MobxTaskPresenter with Store {
     isLoading = true;
     await Future.delayed(const Duration(seconds: 2));
     isLoading = false;
-    task = TaskViewmodel(
-        id: '123123123', title: '123123', description: 'sdfasrgdafvdzxfvgd');
 
-    // final value = await loadTasksUsecase(NoParams());
-    // value.fold((failure) {
-    //   isLoading = false;
-    //   mainError = failure.message;
-    // }, (tasklist) {
-    //   isLoading = false;
-    //   tasks = tasklist
-    //       .map((entity) => TaskViewmodel(
-    //             id: entity.id,
-    //             title: entity.title,
-    //             description: entity.description,
-    //           ))
-    //       .toList();
-    // });
+    final value = await usecase(NoParams());
+    value.fold((failure) {
+      isLoading = false;
+      mainError = failure.message;
+    }, (taskReturned) {
+      isLoading = false;
+      task = TaskViewmodel(
+        id: taskReturned.id,
+        title: taskReturned.title,
+        description: taskReturned.description,
+      );
+    });
   }
 }

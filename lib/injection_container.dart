@@ -31,6 +31,7 @@ import 'features/splash/data/repositories/check_has_logged_user_repository_impl.
 import 'features/splash/domain/repositories/check_has_logged_user_repository.dart';
 import 'features/splash/domain/usecases/check_has_logged_user.dart';
 import 'features/splash/presentation/presenters/mobx_splash_presenter.dart';
+import 'features/task/domain/usecases/load_task.dart';
 import 'features/task/presentation/presenters/mobx_task_presenter.dart';
 
 class AppModule extends Module {
@@ -50,7 +51,8 @@ class AppModule extends Module {
         Bind<MobxNewTaskPresenter>(
             (_) => MobxNewTaskPresenter(usecase: Modular.get<CreateTask>())),
 
-        Bind<MobxTaskPresenter>((_) => MobxTaskPresenter()),
+        Bind<MobxTaskPresenter>(
+            (_) => MobxTaskPresenter(usecase: Modular.get<LoadTask>())),
 
         // usecases
         Bind<CheckHasLoggedUser>((_) => CheckHasLoggedUserImp(

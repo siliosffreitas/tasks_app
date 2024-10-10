@@ -12,11 +12,13 @@ import 'features/signin/data/datasources/add_account_remote_datasource.dart';
 import 'features/signin/data/repositories/add_account_repository_impl.dart';
 import 'features/signin/domain/repositories/add_account_repository.dart';
 import 'features/signin/presentation/presenters/mobx_signin_presenter.dart';
+import 'features/splash/presentation/presenters/mobx_splash_presenter.dart';
 
 class AppModule extends Module {
   @override
   List<Bind> get binds => [
         // controllers
+        Bind<MobxSplashPresenter>((_) => MobxSplashPresenter()),
         Bind<MobxLoginPresenter>(
             (_) => MobxLoginPresenter(usecase: Modular.get<Authentication>())),
 

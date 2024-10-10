@@ -73,6 +73,8 @@ class AppModule extends Module {
                 Modular.get<FirebaseAuth>())),
         Bind<AddAccountRemoteDataSource>((_) =>
             AddAccountRemoteDataSourceFirebase(Modular.get<FirebaseAuth>())),
+        Bind<LogoutRemoteDataSource>(
+            (_) => LogoutRemoteDataSourceFirebase(Modular.get<FirebaseAuth>())),
 
         // extenals
         // Bind<Client>((_) => Client()),

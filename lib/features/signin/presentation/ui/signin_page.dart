@@ -84,7 +84,7 @@ class SigninPage extends StatelessWidget with LoadingManager, UiErrorManager {
                                 : presenter.passwordError,
                           ),
                           onChanged: presenter.validatePassword,
-                          obscureText: true,
+                          // obscureText: true,
                         ),
                       ),
                       const SizedBox(height: 20),

@@ -26,7 +26,9 @@ abstract class _MobxSignPresenter with Store {
       ? ''
       : password!.isEmpty
           ? 'Senha obrigatória'
-          : '';
+          : isPasswordValid(password!)
+              ? ''
+              : 'Senha fraca';
 
   @computed
   String get passwordConfirmationError => passwordConfirmation == null

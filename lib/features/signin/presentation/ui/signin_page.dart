@@ -14,7 +14,7 @@ class SigninPage extends StatelessWidget with LoadingManager, UiErrorManager {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Crie sua conta fácil'),
+        title: const Text('Crie sua conta fácil'),
       ),
       body: Builder(builder: (context) {
         reaction((_) => presenter.mainError, (_) {
@@ -93,7 +93,7 @@ class SigninPage extends StatelessWidget with LoadingManager, UiErrorManager {
                                 icon: const Icon(Icons.help)),
                           ),
                           onChanged: presenter.validatePassword,
-                          // obscureText: true,
+                          obscureText: true,
                         ),
                       ),
                       const SizedBox(height: 20),

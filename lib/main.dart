@@ -5,6 +5,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import 'core/ui/components/app_theme.dart';
 import 'core/ui/components/coming_soon_page.dart';
 import 'features/auth/presentation/presenters/mobx_login_presenter.dart';
 import 'features/auth/presentation/ui/login_page.dart';
@@ -38,9 +39,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       initialRoute: '/login',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: makeDefaultAppTheme,
       onGenerateRoute: _onGenerateRoute,
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );

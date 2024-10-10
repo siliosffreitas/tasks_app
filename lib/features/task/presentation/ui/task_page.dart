@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -41,12 +43,31 @@ class TaskPage extends StatelessWidget {
             return const SizedBox(height: 0);
           }
           return SingleChildScrollView(
-            child: Column(
-              children: [
-                Text(taskId),
-                Text(presenter.task!.title),
-                Text(presenter.task!.description),
-              ],
+            padding: const EdgeInsets.all(40),
+            child: Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const Text('Título:'),
+                    Text(
+                      presenter.task!.title,
+                      style: const TextStyle(
+                        fontSize: 22,
+                      ),
+                    ),
+                    const Divider(height: 20),
+                    const Text('Descrição:'),
+                    Text(
+                      presenter.task!.description,
+                      style: const TextStyle(
+                        fontSize: 22,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
           );
         });

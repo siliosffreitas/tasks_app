@@ -36,7 +36,11 @@ class NewTaskPage extends StatelessWidget with LoadingManager, UiErrorManager {
               presenter.navigateTo!.isNotEmpty) {
             String page = presenter.navigateTo!;
 
-            Navigator.of(context).pushNamed(page);
+            if (page == '/success') {
+              Navigator.of(context).pop(true);
+            } else {
+              Navigator.of(context).pushNamed(page);
+            }
           }
         });
 

@@ -38,7 +38,7 @@ class HomePage extends StatelessWidget {
           }
         });
 
-        reaction((_) => presenter.navigateTo, (_) {
+        reaction((_) => presenter.navigateTo, (_) async {
           if (presenter.navigateTo != null &&
               presenter.navigateTo!.isNotEmpty) {
             String page = presenter.navigateTo!;
@@ -48,6 +48,11 @@ class HomePage extends StatelessWidget {
                   context, 'Deseja realmente fazer logout?', presenter.logout);
             } else if (page == '/login') {
               Navigator.of(context).pushNamedAndRemoveUntil(page, (_) => false);
+            } else if (page == '/new_task') {
+              final result = await Navigator.of(context).pushNamed(page);
+              if (result == true) {
+                presenter.loadTasks();
+              }
             } else {
               Navigator.of(context).pushNamed(page);
             }

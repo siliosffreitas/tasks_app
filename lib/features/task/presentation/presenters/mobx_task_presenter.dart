@@ -31,10 +31,9 @@ abstract class _MobxTaskPresenter with Store {
   Future<void> loadTask(String taskId) async {
     mainError = null;
     navigateTo = null;
+    task = null;
 
     isLoading = true;
-    await Future.delayed(const Duration(seconds: 2));
-    isLoading = false;
 
     final value = await usecase(taskId);
     value.fold((failure) {

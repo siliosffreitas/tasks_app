@@ -22,7 +22,7 @@ class TaskPage extends StatelessWidget {
         title: const Text('Tarefa'),
       ),
       body: Builder(builder: (context) {
-        autorun((_) {
+        reaction((_) => presenter.isLoading, (_) {
           if (presenter.isLoading) {
             showLoading(context);
           } else {
@@ -37,9 +37,10 @@ class TaskPage extends StatelessWidget {
               onTryAgain: () => presenter.loadTask(taskId),
             );
           }
-          if (presenter.isLoading) {
-            return const SizedBox(height: 0);
+          if (presenter.task == null) {
+            return const SizedBox();
           }
+
           return SingleChildScrollView(
             padding: const EdgeInsets.all(40),
             child: Card(

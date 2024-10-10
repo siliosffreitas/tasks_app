@@ -10,8 +10,7 @@ void main() {
   late AccountModel tAccountModel;
 
   setUp(() {
-    tAccountModel =
-        const AccountModel(accessToken: 'abc:223332sdfsdjfghlkjfghlsdj');
+    tAccountModel = const AccountModel(accessToken: 'siliosffreitas@gmail.com');
   });
 
   test('Should be a subclass of AccountEntity', () {

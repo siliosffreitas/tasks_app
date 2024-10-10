@@ -13,7 +13,7 @@ class SplashPage extends StatelessWidget {
       body: Builder(builder: (context) {
         presenter.checkLoggedUser();
 
-        reaction((_) => presenter.navigateTo, (_) {
+        autorun((_) {
           if (presenter.navigateTo != null &&
               presenter.navigateTo!.isNotEmpty) {
             String page = presenter.navigateTo!;

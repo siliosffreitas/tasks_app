@@ -38,7 +38,7 @@ class HomePage extends StatelessWidget {
           }
         });
 
-        reaction((_) => presenter.navigateTo, (_) async {
+        autorun((_) async {
           if (presenter.navigateTo != null &&
               presenter.navigateTo!.isNotEmpty) {
             String page = presenter.navigateTo!;

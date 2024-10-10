@@ -28,7 +28,7 @@ class LoginPage extends StatelessWidget with LoadingManager, UiErrorManager {
           }
         });
 
-        reaction((_) => presenter.navigateTo, (_) {
+        autorun((_) {
           if (presenter.navigateTo != null &&
               presenter.navigateTo!.isNotEmpty) {
             String page = presenter.navigateTo!;

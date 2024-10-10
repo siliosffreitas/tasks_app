@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -24,7 +22,7 @@ class TaskPage extends StatelessWidget {
         title: const Text('Tarefa'),
       ),
       body: Builder(builder: (context) {
-        reaction((_) => presenter.isLoading, (_) {
+        autorun((_) {
           if (presenter.isLoading) {
             showLoading(context);
           } else {

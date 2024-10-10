@@ -1,6 +1,6 @@
 import 'package:mobx/mobx.dart';
-import 'package:tasks_app/core/error/failures.dart';
 
+import '../../../../core/utils/validators.dart';
 import '../../domain/usecases/index.dart';
 
 part 'mobx_login_presenter.g.dart';
@@ -17,7 +17,9 @@ abstract class _MobxLoginPresenter with Store {
       ? ''
       : username!.isEmpty
           ? 'E-mail obrigatório'
-          : '';
+          : isEmailValid(username!)
+              ? ''
+              : 'E-mail inválido';
 
   @computed
   String get passwordError => password == null

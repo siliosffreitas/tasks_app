@@ -59,7 +59,7 @@ class LoginPage extends StatelessWidget with LoadingManager, UiErrorManager {
                     child: Text(
                       'Bem-vindo ao Lista de tarefas by Silio',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),

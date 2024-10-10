@@ -7,11 +7,11 @@ abstract class LoadTasksRemoteDataSource {
   Future<List<TaskModel>> load();
 }
 
-class LoadTasksRemoteDataSourceImpl implements LoadTasksRemoteDataSource {
+class LoadTasksRemoteDataSourceFirebase implements LoadTasksRemoteDataSource {
   final FirebaseFirestore firestore;
   final FirebaseAuth firebaseInstance;
 
-  LoadTasksRemoteDataSourceImpl({
+  LoadTasksRemoteDataSourceFirebase({
     required this.firestore,
     required this.firebaseInstance,
   });

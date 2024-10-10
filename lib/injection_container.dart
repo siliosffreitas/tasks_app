@@ -110,9 +110,13 @@ class AppModule extends Module {
             CreateTaskRemoteDataSourceFirebase(
                 firestore: Modular.get<FirebaseFirestore>(),
                 firebaseInstance: Modular.get<FirebaseAuth>())),
-        Bind<LoadTasksRemoteDataSource>((_) => LoadTasksRemoteDataSourceImpl(
-            firestore: Modular.get<FirebaseFirestore>(),
-            firebaseInstance: Modular.get<FirebaseAuth>())),
+        Bind<LoadTasksRemoteDataSource>((_) =>
+            LoadTasksRemoteDataSourceFirebase(
+                firestore: Modular.get<FirebaseFirestore>(),
+                firebaseInstance: Modular.get<FirebaseAuth>())),
+        Bind<LoadTaskRemoteDataSource>((_) => LoadTaskRemoteDataSourceFirebase(
+              firestore: Modular.get<FirebaseFirestore>(),
+            )),
 
         // extenals
         Bind<FirebaseAuth>((_) => FirebaseAuth.instance),

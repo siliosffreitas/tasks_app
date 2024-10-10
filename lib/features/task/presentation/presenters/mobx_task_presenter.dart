@@ -36,7 +36,7 @@ abstract class _MobxTaskPresenter with Store {
     await Future.delayed(const Duration(seconds: 2));
     isLoading = false;
 
-    final value = await usecase(NoParams());
+    final value = await usecase(taskId);
     value.fold((failure) {
       isLoading = false;
       mainError = failure.message;

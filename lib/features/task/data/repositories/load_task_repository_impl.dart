@@ -15,9 +15,9 @@ class LoadTaskRepositoryImpl implements LoadTaskRepository {
     required this.dataSource,
   });
   @override
-  Future<Either<Failure, TaskEntity>> load() async {
+  Future<Either<Failure, TaskEntity>> load(String taskId) async {
     try {
-      final task = await dataSource.load();
+      final task = await dataSource.load(taskId);
       return Right(task);
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message));

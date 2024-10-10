@@ -14,17 +14,12 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: presenter.showConfirmationLogout,
-          icon: const Icon(Icons.exit_to_app),
-          tooltip: 'Deslogar',
-        ),
         title: const Text('Tarefas'),
         actions: [
           IconButton(
-            onPressed: presenter.goToNewTaskPage,
-            icon: const Icon(Icons.add_box_rounded),
-            tooltip: 'Adicionar nova tarefa',
+            onPressed: presenter.showConfirmationLogout,
+            icon: const Icon(Icons.exit_to_app),
+            tooltip: 'Deslogar',
           )
         ],
       ),
@@ -109,6 +104,11 @@ class HomePage extends StatelessWidget {
           },
         );
       }),
+      floatingActionButton: FloatingActionButton(
+        onPressed: presenter.goToNewTaskPage,
+        child: const Icon(Icons.add),
+        tooltip: 'Adicionar nova tarefa',
+      ),
     );
   }
 }

@@ -12,10 +12,15 @@ final ThemeData makeDefaultAppTheme = ThemeData(
   primaryColorDark: _primaryColor,
   primaryColorLight: _primaryColor,
   unselectedWidgetColor: _unselectedWidgetColor,
+
   textSelectionTheme: const TextSelectionThemeData(
     cursorColor: _primaryColor,
     selectionColor: _primaryColor,
     selectionHandleColor: _primaryColor,
+  ),
+  floatingActionButtonTheme: const FloatingActionButtonThemeData(
+    foregroundColor: Colors.black,
+    backgroundColor: _primaryColor,
   ),
 
   // primaryTextTheme: TextTheme(

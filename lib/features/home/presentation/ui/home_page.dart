@@ -15,6 +15,11 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: presenter.showConfirmationLogout,
+          icon: const Icon(Icons.exit_to_app),
+          tooltip: 'Deslogar',
+        ),
         title: const Text('Tarefas'),
         actions: [
           IconButton(
@@ -38,7 +43,14 @@ class HomePage extends StatelessWidget {
               presenter.navigateTo!.isNotEmpty) {
             String page = presenter.navigateTo!;
 
-            Navigator.of(context).pushNamed(page);
+            if (page == '/confirmation_logout') {
+              showConfirmationMessage(
+                  context, 'Deseja realmente fazer logout?', presenter.logout);
+            } else if (page == '/login') {
+              Navigator.of(context).pushNamedAndRemoveUntil(page, (_) => false);
+            } else {
+              Navigator.of(context).pushNamed(page);
+            }
           }
         });
 

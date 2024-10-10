@@ -60,4 +60,16 @@ abstract class _MobxHomePresenter with Store {
     ];
     // mainError = 'Algum erro ocorreu';
   }
+
+  @action
+  void showConfirmationLogout() {
+    navigateTo = null;
+    navigateTo = '/confirmation_logout';
+  }
+
+  @action
+  void logout() {
+    navigateTo = null;
+    navigateTo = '/login';
+  }
 }

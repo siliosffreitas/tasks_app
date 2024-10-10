@@ -30,7 +30,7 @@ Future<void> main() async {
 
     return runApp(ModularApp(
       module: AppModule(),
-      child: const MyApp(),
+      child: MyApp(),
     ));
   }, ((error, stack) {
     FirebaseCrashlytics.instance.recordError(error, stack);
@@ -38,51 +38,18 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key) {
+    Modular.setInitialRoute('/splash');
+  }
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Flutter Demo',
-      initialRoute: '/splash',
       theme: makeDefaultAppTheme,
-      onGenerateRoute: _onGenerateRoute,
-      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      routeInformationParser: Modular.routeInformationParser,
+      routerDelegate: Modular.routerDelegate,
     );
   }
-
-  Route<dynamic>? _onGenerateRoute(RouteSettings settings) {
-    switch (settings.name) {
-      case '/splash':
-        return _buildPage(
-            SplashPage(presenter: Modular.get<MobxSplashPresenter>()));
-      case '/login':
-        return _buildPage(
-            LoginPage(presenter: Modular.get<MobxLoginPresenter>()));
-      case '/signin':
-        return _buildPage(
-            SigninPage(presenter: Modular.get<MobxSigninPresenter>()));
-
-      case '/home':
-        return _buildPage(HomePage(
-          presenter: Modular.get<MobxHomePresenter>(),
-        ));
-
-      case '/new_task':
-        return _buildPage(NewTaskPage(
-          presenter: Modular.get<MobxNewTaskPresenter>(),
-        ));
-      case '/task':
-        return _buildPage(TaskPage(
-          presenter: Modular.get<MobxTaskPresenter>(),
-          taskId: settings.arguments as String,
-        ));
-      default:
-        return _buildPage(const ComingSoonPage());
-    }
-  }
-
-  Route _buildPage(Widget page) =>
-      MaterialPageRoute(builder: (context) => page);
 }

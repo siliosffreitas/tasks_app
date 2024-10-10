@@ -7,6 +7,7 @@ import 'features/auth/data/repositories/authentication_repository_impl.dart';
 import 'features/auth/domain/repositories/authentication_repository.dart';
 import 'features/auth/domain/usecases/authentication.dart';
 import 'features/auth/presentation/presenters/mobx_login_presenter.dart';
+import 'features/auth/presentation/ui/login_page.dart';
 import 'features/home/data/datasources/load_tasks_remote_datasource.dart';
 import 'features/home/data/datasources/logout_remote_datasource.dart';
 import 'features/home/data/repositories/load_tasks_repository_impl.dart';
@@ -16,26 +17,31 @@ import 'features/home/domain/repositories/logout_repository.dart';
 import 'features/home/domain/usecases/load_tasks.dart';
 import 'features/home/domain/usecases/logout.dart';
 import 'features/home/presentation/presenters/mobx_home_presenter.dart';
+import 'features/home/presentation/ui/home_page.dart';
 import 'features/new_task/data/datasources/create_task_remote_datasource.dart';
 import 'features/new_task/data/repositories/create_task_repository_impl.dart';
 import 'features/new_task/domain/repositories/create_task_repository.dart';
 import 'features/new_task/domain/usecases/create_task.dart';
 import 'features/new_task/presentation/presenters/mobx_new_task_presenter.dart';
+import 'features/new_task/presentation/ui/new_task_page.dart';
 import 'features/signin/data/datasources/add_account_remote_datasource.dart';
 import 'features/signin/data/repositories/add_account_repository_impl.dart';
 import 'features/signin/domain/repositories/add_account_repository.dart';
 import 'features/signin/domain/usecases/add_account.dart';
 import 'features/signin/presentation/presenters/mobx_signin_presenter.dart';
+import 'features/signin/presentation/ui/signin_page.dart';
 import 'features/splash/data/datasources/check_has_logged_user_remote_datasource.dart';
 import 'features/splash/data/repositories/check_has_logged_user_repository_impl.dart';
 import 'features/splash/domain/repositories/check_has_logged_user_repository.dart';
 import 'features/splash/domain/usecases/check_has_logged_user.dart';
 import 'features/splash/presentation/presenters/mobx_splash_presenter.dart';
+import 'features/splash/presentation/ui/splash_page.dart';
 import 'features/task/data/datasources/load_task_remote_datasource.dart';
 import 'features/task/data/repositories/load_task_repository_impl.dart';
 import 'features/task/domain/reposirory/load_task_repository.dart';
 import 'features/task/domain/usecases/load_task.dart';
 import 'features/task/presentation/presenters/mobx_task_presenter.dart';
+import 'features/task/presentation/ui/task_page.dart';
 
 class AppModule extends Module {
   @override
@@ -121,5 +127,29 @@ class AppModule extends Module {
         // extenals
         Bind<FirebaseAuth>((_) => FirebaseAuth.instance),
         Bind<FirebaseFirestore>((_) => FirebaseFirestore.instance),
+      ];
+
+  @override
+  List<ModularRoute> get routes => [
+        ChildRoute('/splash',
+            child: (context, args) =>
+                SplashPage(presenter: Modular.get<MobxSplashPresenter>())),
+        ChildRoute('/login',
+            child: (context, args) =>
+                LoginPage(presenter: Modular.get<MobxLoginPresenter>())),
+        ChildRoute('/signin',
+            child: (context, args) =>
+                SigninPage(presenter: Modular.get<MobxSigninPresenter>())),
+        ChildRoute('/home',
+            child: (context, args) =>
+                HomePage(presenter: Modular.get<MobxHomePresenter>())),
+        ChildRoute('/new_task',
+            child: (context, args) => NewTaskPage(
+                  presenter: Modular.get<MobxNewTaskPresenter>(),
+                )),
+        ChildRoute('/task',
+            child: (context, args) => TaskPage(
+                presenter: Modular.get<MobxTaskPresenter>(),
+                taskId: args as String)),
       ];
 }

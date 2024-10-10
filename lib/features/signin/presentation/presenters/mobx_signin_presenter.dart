@@ -106,4 +106,10 @@ abstract class _MobxSignPresenter with Store {
     navigateTo = null;
     navigateTo = '/home';
   }
+
+  @action
+  void goPasswordStrongExplanation() {
+    navigateTo = null;
+    navigateTo = '/how_get_strong_password';
+  }
 }

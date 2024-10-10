@@ -192,6 +192,17 @@ mixin _$MobxSigninPresenter on _MobxSignPresenter, Store {
   }
 
   @override
+  void goPasswordStrongExplanation() {
+    final _$actionInfo = _$_MobxSignPresenterActionController.startAction(
+        name: '_MobxSignPresenter.goPasswordStrongExplanation');
+    try {
+      return super.goPasswordStrongExplanation();
+    } finally {
+      _$_MobxSignPresenterActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 isLoading: ${isLoading},

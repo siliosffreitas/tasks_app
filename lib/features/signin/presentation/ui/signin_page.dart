@@ -43,6 +43,11 @@ class SigninPage extends StatelessWidget with LoadingManager, UiErrorManager {
                 'Conta criada com sucesso, viu como foi fácil, entra aí',
                 onClose: () => presenter.goHome(),
               );
+            } else if (page == '/how_get_strong_password') {
+              showMessage(
+                context,
+                'Para ter uma senha forte, você precisa digitar:\n• Pelo menos 8 caracteres\n• Pelo menos 1 letra maiúscula\n• Pelo menos 1 letra minúscula\n• Pelo menos 1 número\n• Pelo menos 1 caractere especial',
+              );
             } else {
               Navigator.of(context).pushNamed(page);
             }
@@ -82,6 +87,10 @@ class SigninPage extends StatelessWidget with LoadingManager, UiErrorManager {
                             errorText: presenter.passwordError.isEmpty == true
                                 ? null
                                 : presenter.passwordError,
+                            suffixIcon: IconButton(
+                                onPressed:
+                                    presenter.goPasswordStrongExplanation,
+                                icon: const Icon(Icons.help)),
                           ),
                           onChanged: presenter.validatePassword,
                           // obscureText: true,

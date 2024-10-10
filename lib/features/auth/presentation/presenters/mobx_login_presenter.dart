@@ -32,6 +32,7 @@ abstract class _MobxLoginPresenter with Store {
   bool get isFormValid =>
       username != null &&
       username!.isNotEmpty &&
+      isEmailValid(username!) &&
       password != null &&
       password!.isNotEmpty;
 

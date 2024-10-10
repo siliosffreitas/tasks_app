@@ -86,6 +86,7 @@ class LoginPage extends StatelessWidget with LoadingManager, UiErrorManager {
                                 : presenter.passwordError,
                           ),
                           onChanged: presenter.validatePassword,
+                          obscureText: true,
                         ),
                       ),
                       const SizedBox(height: 40),

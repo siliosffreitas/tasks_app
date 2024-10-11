@@ -171,4 +171,16 @@ void main() {
       verify(() => presenter.showConfirmationLogout()).called(1);
     },
   );
+
+  // testWidgets(
+  //   'Should present loading',
+  //   (WidgetTester tester) async {
+  //     when(() => presenter.isLoading).thenReturn(true);
+  //     await loadPage(tester);
+
+  //     await tester.pump(Duration.zero);
+
+  //     expect(find.byType(CircularProgressIndicator), findsOneWidget);
+  //   },
+  // );
 }

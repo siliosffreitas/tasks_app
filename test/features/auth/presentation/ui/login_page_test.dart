@@ -3,32 +3,30 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:mocktail/mocktail.dart';
 import 'package:faker/faker.dart';
-import 'package:tasks_app/features/auth/domain/usecases/authentication.dart';
 import 'package:tasks_app/features/auth/presentation/presenters/mobx_login_presenter.dart';
 import 'package:tasks_app/features/auth/presentation/ui/login_page.dart';
 
-class MockMobxLoginPresenter extends Mock implements MobxLoginPresenter {}
+class MockMobxLoginPresenter extends Mock implements MobxLoginPresenter {
+  MockMobxLoginPresenter() {
+    authCall();
+  }
 
-class MockAuthentication extends Mock implements Authentication {}
+  When _authCall() => when(() => auth());
+  void authCall() => _authCall().thenAnswer((_) async => _);
+}
 
 void main() {
-  setUpAll(() {
-    registerFallbackValue(
-        const AuthenticationParams(username: '', password: ''));
-  });
-
   late MobxLoginPresenter presenter;
+
+  setUp(() {
+    presenter = MockMobxLoginPresenter();
+  });
 
   Future<void> loadPage(WidgetTester tester) async {
     final loginPage = MaterialApp(
       initialRoute: '/login',
       routes: {
         '/login': (context) => LoginPage(presenter: presenter),
-        '/home': (context) => const Scaffold(
-              body: Center(
-                child: Text('Home'),
-              ),
-            )
       },
     );
     await tester.pumpWidget(loginPage);
@@ -37,7 +35,6 @@ void main() {
   testWidgets(
     'Should load with correct initial state',
     (WidgetTester tester) async {
-      presenter = MockMobxLoginPresenter();
       await loadPage(tester);
 
       final emailTextChildren = find.descendant(
@@ -60,7 +57,6 @@ void main() {
   testWidgets(
     'Should call validate with correct values',
     (WidgetTester tester) async {
-      presenter = MockMobxLoginPresenter();
       await loadPage(tester);
 
       final username = faker.internet.email();
@@ -73,7 +69,6 @@ void main() {
         find.bySemanticsLabel('Senha'),
         password,
       );
-
       verify(() => presenter.validatePassword(password));
     },
   );
@@ -81,46 +76,18 @@ void main() {
   testWidgets(
     'Should present error if username is invalid',
     (WidgetTester tester) async {
-      presenter = MobxLoginPresenter(usecase: MockAuthentication());
+      when(() => presenter.usernameError).thenReturn('any error');
       await loadPage(tester);
 
-      await tester.enterText(find.bySemanticsLabel('E-mail'), 'silio');
-
-      await tester.pump();
-
-      expect(find.text('E-mail inválido'), findsOneWidget);
+      expect(find.text('any error'), findsOneWidget);
     },
   );
 
   testWidgets(
-    'Should present error if username is empty',
+    'Should present no error if username valid (error null)',
     (WidgetTester tester) async {
-      presenter = MobxLoginPresenter(usecase: MockAuthentication());
+      when(() => presenter.usernameError).thenReturn(null);
       await loadPage(tester);
-
-      await tester.enterText(
-          find.bySemanticsLabel('E-mail'), 'siliosffreitas@gmail.com');
-
-      await tester.pump();
-
-      await tester.enterText(find.bySemanticsLabel('E-mail'), '');
-
-      await tester.pump();
-
-      expect(find.text('E-mail obrigatório'), findsOneWidget);
-    },
-  );
-
-  testWidgets(
-    'Should not present error if username is valid',
-    (WidgetTester tester) async {
-      presenter = MobxLoginPresenter(usecase: MockAuthentication());
-      await loadPage(tester);
-
-      await tester.enterText(
-          find.bySemanticsLabel('E-mail'), 'siliosffreitas@gmail.com');
-
-      await tester.pump();
 
       final emailTextChildren = find.descendant(
         of: find.bySemanticsLabel('E-mail'),
@@ -131,30 +98,48 @@ void main() {
   );
 
   testWidgets(
-    'Should present error if password is empty',
+    'Should presents no error if username valid (error empty)',
     (WidgetTester tester) async {
-      presenter = MobxLoginPresenter(usecase: MockAuthentication());
+      when(() => presenter.usernameError).thenReturn('');
       await loadPage(tester);
 
-      await tester.enterText(find.bySemanticsLabel('Senha'), 'Silio123\$');
-      await tester.pump();
-
-      await tester.enterText(find.bySemanticsLabel('Senha'), '');
-      await tester.pump();
-
-      expect(find.text('Senha obrigatória'), findsOneWidget);
+      final emailTextChildren = find.descendant(
+        of: find.bySemanticsLabel('E-mail'),
+        matching: find.byType(Text),
+      );
+      expect(emailTextChildren, findsOneWidget);
     },
   );
 
   testWidgets(
-    'Should not present error if password is valid',
+    'Should present error if password is invalid',
     (WidgetTester tester) async {
-      presenter = MobxLoginPresenter(usecase: MockAuthentication());
+      when(() => presenter.passwordError).thenReturn('any error');
       await loadPage(tester);
 
-      await tester.enterText(find.bySemanticsLabel('Senha'), 'Silio123\$');
+      expect(find.text('any error'), findsOneWidget);
+    },
+  );
 
-      await tester.pump();
+  testWidgets(
+    'Should present no error if password valid (error null)',
+    (WidgetTester tester) async {
+      when(() => presenter.passwordError).thenReturn(null);
+      await loadPage(tester);
+
+      final emailTextChildren = find.descendant(
+        of: find.bySemanticsLabel('Senha'),
+        matching: find.byType(Text),
+      );
+      expect(emailTextChildren, findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    'Should presents no error if password valid (error empty)',
+    (WidgetTester tester) async {
+      when(() => presenter.passwordError).thenReturn('');
+      await loadPage(tester);
 
       final emailTextChildren = find.descendant(
         of: find.bySemanticsLabel('Senha'),
@@ -167,15 +152,8 @@ void main() {
   testWidgets(
     'Should enable form button if form is valid',
     (WidgetTester tester) async {
-      presenter = MobxLoginPresenter(usecase: MockAuthentication());
+      when(() => presenter.isFormValid).thenReturn(true);
       await loadPage(tester);
-
-      await tester.enterText(
-          find.bySemanticsLabel('E-mail'), 'siliosffreitas@gmail.com');
-      await tester.pump();
-
-      await tester.enterText(find.bySemanticsLabel('Senha'), 'Silio123\$');
-      await tester.pump();
 
       final button = tester.widget<ElevatedButton>(find.byType(ElevatedButton));
       expect(button.onPressed, isNotNull);
@@ -183,59 +161,20 @@ void main() {
   );
 
   testWidgets(
-    'Should disable form button if form is invalid 2',
+    'Should disable form button if form is invalid',
     (WidgetTester tester) async {
-      presenter = MobxLoginPresenter(usecase: MockAuthentication());
+      when(() => presenter.isFormValid).thenReturn(false);
       await loadPage(tester);
-
-      await tester.enterText(find.bySemanticsLabel('E-mail'), 'siliosffreitas');
-      await tester.pump();
-
-      await tester.enterText(find.bySemanticsLabel('Senha'), 'Silio123\$');
-      await tester.pump();
 
       final button = tester.widget<ElevatedButton>(find.byType(ElevatedButton));
       expect(button.onPressed, null);
     },
   );
-
-  testWidgets(
-    'Should disable form button if form is invalid 3',
-    (WidgetTester tester) async {
-      presenter = MobxLoginPresenter(usecase: MockAuthentication());
-      await loadPage(tester);
-
-      await tester.enterText(
-          find.bySemanticsLabel('E-mail'), 'siliosffreitas@gmail.com');
-      await tester.pump();
-
-      await tester.enterText(find.bySemanticsLabel('Senha'), 'Silio123\$');
-      await tester.pump();
-
-      await tester.enterText(find.bySemanticsLabel('Senha'), '');
-      await tester.pump();
-
-      final button = tester.widget<ElevatedButton>(find.byType(ElevatedButton));
-      expect(button.onPressed, null);
-    },
-  );
-
   // testWidgets(
   //   'Should present loading',
   //   (WidgetTester tester) async {
-  //     presenter = MobxLoginPresenter(usecase: MockAuthentication());
+  //     when(() => presenter.isLoading).thenReturn(true);
   //     await loadPage(tester);
-
-  //     await tester.enterText(
-  //         find.bySemanticsLabel('E-mail'), 'siliosffreitas@gmail.com');
-  //     await tester.pump();
-
-  //     await tester.enterText(find.bySemanticsLabel('Senha'), 'Silio123\$');
-  //     await tester.pump();
-
-  //     final okButton = find.text('Entrar');
-
-  //     await tester.tap(okButton);
 
   //     await tester.pump(Duration.zero);
 
@@ -243,29 +182,34 @@ void main() {
   //   },
   // );
 
-  // testWidgets(
-  //   'Should change page',
-  //   (WidgetTester tester) async {
-  //     Authentication u = MockAuthentication();
-  //     when(() => u.call(any()))
-  //         .thenAnswer((_) async => Right(AccountEntity(accessToken: '')));
+  testWidgets(
+    'Should call authentication on form submit',
+    (WidgetTester tester) async {
+      when(() => presenter.isFormValid).thenReturn(true);
+      await loadPage(tester);
 
-  //     presenter = MobxLoginPresenter(usecase: u);
-  //     await loadPage(tester);
+      final button = find.byType(ElevatedButton);
 
-  //     await tester.enterText(
-  //         find.bySemanticsLabel('E-mail'), 'siliosffreitas@gmail.com');
-  //     await tester.pump();
+      await tester.ensureVisible(button);
 
-  //     await tester.enterText(find.bySemanticsLabel('Senha'), 'Silio123\$');
-  //     await tester.pump();
+      await tester.tap(button);
+      await tester.pump();
 
-  //     final okButton = find.text('Entrar');
+      verify(() => presenter.auth()).called(1);
+    },
+  );
 
-  //     await tester.tap(okButton);
-  //     await tester.pump(Duration.zero);
+  testWidgets(
+    'Should go to signin page',
+    (WidgetTester tester) async {
+      await loadPage(tester);
 
-  //     expect(find.text('Home'), findsOneWidget);
-  //   },
-  // );
+      final button = find.byType(TextButton);
+      await tester.ensureVisible(button);
+      await tester.tap(button);
+      await tester.pump();
+
+      verify(() => presenter.goToSigninPage()).called(1);
+    },
+  );
 }

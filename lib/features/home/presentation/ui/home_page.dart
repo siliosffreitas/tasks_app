@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mobx/mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mobx/mobx.dart';
 
-import '../../../../core/ui/components/index.dart';
+import '../../../../core/ui/components/error_page.dart';
+import '../../../../core/ui/components/show_confirmation.dart';
+import '../../../../core/ui/components/spinner_dialog.dart';
 import '../presenters/mobx_home_presenter.dart';
 import 'task_viewmodel.dart';
 
@@ -25,11 +27,11 @@ class HomePage extends StatelessWidget {
         ],
       ),
       body: Builder(builder: (context) {
-        reaction((_) => presenter.isLoading, (_) {
+        autorun((_) {
           if (presenter.isLoading) {
-            showLoading(context);
+            SpinnerDialog.showLoading(context);
           } else {
-            hideLoading(context);
+            SpinnerDialog.hideLoading(context);
           }
         });
 

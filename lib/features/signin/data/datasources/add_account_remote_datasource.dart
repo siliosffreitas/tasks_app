@@ -26,6 +26,8 @@ class AddAccountRemoteDataSourceFirebase implements AddAccountRemoteDataSource {
       } else {
         throw ServerException(e.message ?? 'Algo deu errado');
       }
+    } catch (_) {
+      throw ServerException('Algo deu errado');
     }
   }
 }

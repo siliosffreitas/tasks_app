@@ -12,21 +12,21 @@ abstract class _MobxNewTaskPresenter with Store {
   _MobxNewTaskPresenter({required this.usecase});
 
   @computed
-  String get titleError => title == null
+  String? get titleError => title == null
       ? ''
       : title!.isEmpty
           ? 'Título obrigatório'
           : '';
 
   @computed
-  String get descriptionError => description == null
+  String? get descriptionError => description == null
       ? ''
       : description!.isEmpty
           ? 'Descrição obrigatória'
           : '';
 
   @computed
-  bool get isFormValid =>
+  bool? get isFormValid =>
       title != null &&
       title!.isNotEmpty &&
       description != null &&

@@ -76,7 +76,7 @@ abstract class _MobxHomePresenter with Store {
     isLoading = true;
     await Future.delayed(const Duration(seconds: 2));
     await logoutUsecase(NoParams());
-    isLoading = true;
+    isLoading = false;
     navigateTo = null;
     navigateTo = '/login';
   }

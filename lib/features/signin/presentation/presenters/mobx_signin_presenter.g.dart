@@ -9,33 +9,33 @@ part of 'mobx_signin_presenter.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$MobxSigninPresenter on _MobxSignPresenter, Store {
-  Computed<String>? _$usernameErrorComputed;
+  Computed<String?>? _$usernameErrorComputed;
 
   @override
-  String get usernameError =>
-      (_$usernameErrorComputed ??= Computed<String>(() => super.usernameError,
+  String? get usernameError =>
+      (_$usernameErrorComputed ??= Computed<String?>(() => super.usernameError,
               name: '_MobxSignPresenter.usernameError'))
           .value;
-  Computed<String>? _$passwordErrorComputed;
+  Computed<String?>? _$passwordErrorComputed;
 
   @override
-  String get passwordError =>
-      (_$passwordErrorComputed ??= Computed<String>(() => super.passwordError,
+  String? get passwordError =>
+      (_$passwordErrorComputed ??= Computed<String?>(() => super.passwordError,
               name: '_MobxSignPresenter.passwordError'))
           .value;
-  Computed<String>? _$passwordConfirmationErrorComputed;
+  Computed<String?>? _$passwordConfirmationErrorComputed;
 
   @override
-  String get passwordConfirmationError =>
-      (_$passwordConfirmationErrorComputed ??= Computed<String>(
+  String? get passwordConfirmationError =>
+      (_$passwordConfirmationErrorComputed ??= Computed<String?>(
               () => super.passwordConfirmationError,
               name: '_MobxSignPresenter.passwordConfirmationError'))
           .value;
-  Computed<bool>? _$isFormValidComputed;
+  Computed<bool?>? _$isFormValidComputed;
 
   @override
-  bool get isFormValid =>
-      (_$isFormValidComputed ??= Computed<bool>(() => super.isFormValid,
+  bool? get isFormValid =>
+      (_$isFormValidComputed ??= Computed<bool?>(() => super.isFormValid,
               name: '_MobxSignPresenter.isFormValid'))
           .value;
 

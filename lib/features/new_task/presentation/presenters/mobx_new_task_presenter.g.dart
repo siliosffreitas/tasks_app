@@ -9,25 +9,25 @@ part of 'mobx_new_task_presenter.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$MobxNewTaskPresenter on _MobxNewTaskPresenter, Store {
-  Computed<String>? _$titleErrorComputed;
+  Computed<String?>? _$titleErrorComputed;
 
   @override
-  String get titleError =>
-      (_$titleErrorComputed ??= Computed<String>(() => super.titleError,
+  String? get titleError =>
+      (_$titleErrorComputed ??= Computed<String?>(() => super.titleError,
               name: '_MobxNewTaskPresenter.titleError'))
           .value;
-  Computed<String>? _$descriptionErrorComputed;
+  Computed<String?>? _$descriptionErrorComputed;
 
   @override
-  String get descriptionError => (_$descriptionErrorComputed ??=
-          Computed<String>(() => super.descriptionError,
+  String? get descriptionError => (_$descriptionErrorComputed ??=
+          Computed<String?>(() => super.descriptionError,
               name: '_MobxNewTaskPresenter.descriptionError'))
       .value;
-  Computed<bool>? _$isFormValidComputed;
+  Computed<bool?>? _$isFormValidComputed;
 
   @override
-  bool get isFormValid =>
-      (_$isFormValidComputed ??= Computed<bool>(() => super.isFormValid,
+  bool? get isFormValid =>
+      (_$isFormValidComputed ??= Computed<bool?>(() => super.isFormValid,
               name: '_MobxNewTaskPresenter.isFormValid'))
           .value;
 

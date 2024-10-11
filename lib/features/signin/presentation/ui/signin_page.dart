@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mobx/mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mobx/mobx.dart';
 
-import '../../../../../core/ui/mixins/index.dart';
-import '../../../../core/ui/components/index.dart';
+import '../../../../core/ui/components/show_message.dart';
+import '../../../../core/ui/components/spinner_dialog.dart';
 import '../presenters/mobx_signin_presenter.dart';
 
-class SigninPage extends StatelessWidget with LoadingManager, UiErrorManager {
+class SigninPage extends StatelessWidget {
   final MobxSigninPresenter presenter;
   const SigninPage({required this.presenter, Key? key}) : super(key: key);
 
@@ -18,17 +18,17 @@ class SigninPage extends StatelessWidget with LoadingManager, UiErrorManager {
         title: const Text('Crie sua conta fácil'),
       ),
       body: Builder(builder: (context) {
-        reaction((_) => presenter.mainError, (_) {
+        autorun((_) {
           if (presenter.mainError != null) {
             showMessage(context, presenter.mainError!);
           }
         });
 
-        reaction((_) => presenter.isLoading, (_) {
+        autorun((_) {
           if (presenter.isLoading) {
-            showLoading(context);
+            SpinnerDialog.showLoading(context);
           } else {
-            hideLoading(context);
+            SpinnerDialog.hideLoading(context);
           }
         });
 
@@ -71,7 +71,7 @@ class SigninPage extends StatelessWidget with LoadingManager, UiErrorManager {
                         builder: (_) => TextFormField(
                           decoration: InputDecoration(
                             hintText: 'E-mail',
-                            errorText: presenter.usernameError.isEmpty == true
+                            errorText: presenter.usernameError?.isEmpty == true
                                 ? null
                                 : presenter.usernameError,
                           ),
@@ -85,7 +85,7 @@ class SigninPage extends StatelessWidget with LoadingManager, UiErrorManager {
                         builder: (_) => TextFormField(
                           decoration: InputDecoration(
                             hintText: 'Senha',
-                            errorText: presenter.passwordError.isEmpty == true
+                            errorText: presenter.passwordError?.isEmpty == true
                                 ? null
                                 : presenter.passwordError,
                             suffixIcon: IconButton(
@@ -105,7 +105,7 @@ class SigninPage extends StatelessWidget with LoadingManager, UiErrorManager {
                           decoration: InputDecoration(
                             hintText: 'Confirmação da Senha',
                             errorText:
-                                presenter.passwordConfirmationError.isEmpty ==
+                                presenter.passwordConfirmationError?.isEmpty ==
                                         true
                                     ? null
                                     : presenter.passwordConfirmationError,
@@ -120,7 +120,7 @@ class SigninPage extends StatelessWidget with LoadingManager, UiErrorManager {
                             onPressed: presenter.isFormValid == true
                                 ? presenter.auth
                                 : null,
-                            child: const Text('Entrar')),
+                            child: const Text('Criar Conta')),
                       ),
                     ],
                   ),

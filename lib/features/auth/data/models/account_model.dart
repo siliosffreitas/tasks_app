@@ -1,4 +1,4 @@
-import '../../domain/entities/index.dart';
+import '../../domain/entities/account_entity.dart';
 
 class AccountModel extends AccountEntity {
   const AccountModel({required String accessToken})

@@ -3,8 +3,8 @@ import 'package:equatable/equatable.dart';
 
 import '../../../../core/error/failures.dart';
 import '../../../../core/usecases/usecase.dart';
-import '../entities/index.dart';
-import '../repositories/index.dart';
+import '../entities/account_entity.dart';
+import '../repositories/authentication_repository.dart';
 
 abstract class Authentication
     implements UseCase<AccountEntity, AuthenticationParams> {

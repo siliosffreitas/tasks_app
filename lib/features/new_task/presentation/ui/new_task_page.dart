@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mobx/mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mobx/mobx.dart';
 
-import '../../../../../core/ui/mixins/index.dart';
-import '../../../../core/ui/components/index.dart';
+import '../../../../core/ui/components/show_message.dart';
+import '../../../../core/ui/components/spinner_dialog.dart';
 import '../presenters/mobx_new_task_presenter.dart';
 
-class NewTaskPage extends StatelessWidget with LoadingManager, UiErrorManager {
+class NewTaskPage extends StatelessWidget {
   final MobxNewTaskPresenter presenter;
   const NewTaskPage({required this.presenter, Key? key}) : super(key: key);
 
@@ -18,17 +18,17 @@ class NewTaskPage extends StatelessWidget with LoadingManager, UiErrorManager {
         title: const Text('Nova tarefa'),
       ),
       body: Builder(builder: (context) {
-        reaction((_) => presenter.mainError, (_) {
+        autorun((_) {
           if (presenter.mainError != null) {
             showMessage(context, presenter.mainError!);
           }
         });
 
-        reaction((_) => presenter.isLoading, (_) {
+        autorun((_) {
           if (presenter.isLoading) {
-            showLoading(context);
+            SpinnerDialog.showLoading(context);
           } else {
-            hideLoading(context);
+            SpinnerDialog.hideLoading(context);
           }
         });
 
@@ -61,7 +61,7 @@ class NewTaskPage extends StatelessWidget with LoadingManager, UiErrorManager {
                         builder: (_) => TextFormField(
                           decoration: InputDecoration(
                             hintText: 'Título',
-                            errorText: presenter.titleError.isEmpty == true
+                            errorText: presenter.titleError?.isEmpty == true
                                 ? null
                                 : presenter.titleError,
                           ),
@@ -79,7 +79,7 @@ class NewTaskPage extends StatelessWidget with LoadingManager, UiErrorManager {
                             decoration: InputDecoration(
                               hintText: 'Descrição',
                               errorText:
-                                  presenter.descriptionError.isEmpty == true
+                                  presenter.descriptionError?.isEmpty == true
                                       ? null
                                       : presenter.descriptionError,
                             ),

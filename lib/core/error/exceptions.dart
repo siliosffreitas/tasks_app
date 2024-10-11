@@ -6,8 +6,4 @@ class ServerException implements Exception {
 
 class UnauthorizedException implements Exception {}
 
-class CacheException implements Exception {
-  CacheException();
-}
-
-class ConnectionException implements Exception {}
+class CacheException implements Exception {}

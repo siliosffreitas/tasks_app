@@ -56,7 +56,7 @@ void main() {
     verify(() => firestore.collection('tasks')).called(1);
   });
 
-  test('Should return task ', () async {
+  test('Should return a task', () async {
     final result = await sut.load(tTaskId);
     expect(
         result,

@@ -71,7 +71,11 @@ class HomePage extends StatelessWidget {
                 onTryAgain: presenter.loadTasks,
               );
             }
-            List<TaskViewmodel> tasks = presenter.tasks;
+            List<TaskViewmodel>? tasks = presenter.tasks;
+
+            if (tasks == null) {
+              return const SizedBox();
+            }
 
             if (tasks.isEmpty) {
               return ErrorPage(

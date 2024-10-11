@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 const _primaryColor = Color.fromRGBO(245, 189, 66, 1);
 const _labelColor = Color.fromRGBO(138, 138, 138, 1);
@@ -28,14 +29,15 @@ final ThemeData makeDefaultAppTheme = ThemeData(
   // ),
   appBarTheme: const AppBarTheme(
     centerTitle: true,
-    elevation: 0,
+
     color: _primaryColor,
     iconTheme: IconThemeData(
       color: Colors.black,
     ),
     shadowColor: Colors.transparent,
     // attention to status bar icon color
-    // systemOverlayStyle: SystemUiOverlayStyle.light,
+    systemOverlayStyle: SystemUiOverlayStyle.dark,
+
     // titleTextStyle: TextStyle(
     //   color: Colors.black,
     // ),
@@ -80,6 +82,7 @@ final ThemeData makeDefaultAppTheme = ThemeData(
     // ),
   ),
   inputDecorationTheme: InputDecorationTheme(
+    filled: true,
     focusedBorder: OutlineInputBorder(
       borderSide: const BorderSide(
         color: _primaryColor,

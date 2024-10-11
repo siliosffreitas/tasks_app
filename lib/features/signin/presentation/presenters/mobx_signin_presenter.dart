@@ -35,19 +35,21 @@ abstract class _MobxSignPresenter with Store {
       ? ''
       : passwordConfirmation!.isEmpty
           ? 'Confirmação obrigatória'
-          : passwordConfirmation == password!
+          : passwordConfirmation == (password ?? '')
               ? ''
               : 'Confirmação errada';
 
   @computed
   bool get isFormValid =>
       username != null &&
+      password != null &&
+      passwordConfirmation != null &&
       username!.isNotEmpty &&
       isEmailValid(username!) &&
-      password != null &&
+      isPasswordValid(password!) &&
       password!.isNotEmpty &&
-      passwordConfirmation != null &&
-      passwordConfirmation!.isNotEmpty;
+      passwordConfirmation!.isNotEmpty &&
+      password == passwordConfirmation;
 
   @observable
   bool isLoading = false;

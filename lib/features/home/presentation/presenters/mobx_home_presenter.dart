@@ -23,7 +23,7 @@ abstract class _MobxHomePresenter with Store {
   String? navigateTo;
 
   @observable
-  List<TaskViewmodel> tasks = [];
+  List<TaskViewmodel>? tasks;
 
   _MobxHomePresenter({
     required this.logoutUsecase,

@@ -35,7 +35,7 @@ abstract class _MobxSignPresenter with Store {
       ? ''
       : passwordConfirmation!.isEmpty
           ? 'Confirmação obrigatória'
-          : passwordConfirmation == password!
+          : passwordConfirmation == (password ?? '')
               ? ''
               : 'Confirmação errada';
 

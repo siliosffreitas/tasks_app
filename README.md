@@ -2,42 +2,53 @@
 
 Aplicativo de desafio para Keener.
 
+## Get Start
+
+Para compilar este projeto, certifique-se de ter a versão 2.10.0 do Flutter instalado
 
 
-Pelo fato de ter sido feito com TDD a cobertura de teste está em **100%**, como pode ser visto em <a href="coverage/html/index.html">**coverage/html/index.html**</a> ou rodando seguintes comandos:
+## Requisitos:
+1. Uso do Crashlytics e Analytics como log de eventos e de erros
 
-`flutter test --coverage` recomendo rodar com o `fvm` no início 
+<img src="screenshots/crashlytics.png" width="400" title="crashlytics"/>
 
-`genhtml coverage/lcov.info -o coverage/html`
+<img src="screenshots/analytics.png" width="400" title="analytics"/>
 
-`open coverage/html/index.html`
+2. Uso do Firebase para autenticação do usuário
 
-<img src="/screenshots/show_tests.png" width="400" title="Detalhes de Testes na IDE"/>
-<img src="/screenshots/show_tests_2.png" width="400" title="Detalhes de Testes no navegador"/>
+<img src="screenshots/firebase_auth.png" width="400" title="Authentication"/>
 
-## Observações:
-1. A busca e a ordenação é feita localmente com os dados que já estão na lista.
+3. Uso do Cloud Firestore como banco de dados 
 
-2. Na tela de listagem de Pokemon não vem as informações de ID e de url da foto, apenas o nome de cada Pokemon (pelo menos, no tempo que tive para estudar a API,não encontrei um endpoint que retornasse a lista de Pokemon que é apresentado na Home do protótipo). Por este motivo para cada Pokemon desenhado na tela, tive que chamar o endpoint de detalhes, mesmo que esse mesmo endpoint de detalhes  seja chamado ao entrar em Pokemon. Decidi por manter as duas chamadas (mesmo q talvez a segunda seja desnecessária) pois em algum momento no futuro eu posso encontrar um endpoint melhor para popular a Home e assim a minha tela de Detalhes continuaria funcionando da forma que foi projetada.
 
-3. Não encontrei no endpoint de detalhes de um Pokemon a informação a respeito da cor predominante dele. Decidi por manter as cores fixas em verde, pois calcular por meio de uma biblioteca externa qual a cor predominante de uma imagem da internet faria a cobertura de testes cair.
+<img src="screenshots/cloud_firestore.png" width="400" title="Cloud Firestore"/>
 
-4. Por padrão as IDEs executam a main.dart de um app Flutter localizado na pasta lib. Para executar esse projeto é necessário dizer para a IDE que a main que ela deve usar é a que está no seguinte local: lib/main/main.dart.
+4. O Mobx está sendo utilzado como gerenciador de estado das telas, ele representa a camada de **Presenter**, que será exlicado logo mais na sessão de arquitetura.
 
-5. O tamanho escolhido para a página é 30 elementos.
-6. Por facilidade, a hierarquia da pasta de testes segue a mesma hierarquia da pasta lib. 
+5. Uso do Flutter Modular para injeção de dependências (soli**D**). Todas as dependências nas classes são injetadas por quem utiliza-as, facilitando assim a criação dos testes
+6. Arquitetura Limpa e princípios do SOLID. A Arquitetura seguida foi a proposta por **Uncle Bob Martin** levemente adaptado. 
+
+<img src="screenshots/topology.png" width="400" title="Topologia"/>
 
 ## Preview
 
-Na pasta screenshots existem alguns prints tirados do app rodando no Simulador do iPhone e um vídeo com um overview.
-### Pokemons
-<img src="/screenshots/pokemons_page.png" width="400" title="Home"/>
+Na pasta screenshots existem alguns prints tirados do app rodando e um vídeo com um overview.
+### Tela de Login
+<img src="screenshots/login.png" width="400" title="Login"/>
 
-### Detalhes de um Pokemon
-<img src="/screenshots/pokemon_details_page.png" width="400" title="Detalhes"/>
+### Tela de Cadastro
+<img src="screenshots/signin.png" width="400" title="Cadastro"/>
+
+### Tela Home
+<img src="screenshots/home.png" width="400" title="Home"/>
+
+### Nova tarefa
+<img src="screenshots/new_task.png" width="400" title="Nova tarefa"/>
+
+### Detalhes de uma tarefa
+<img src="screenshots/task.png" width="400" title="Detalhes de uma tarefa"/>
 
 ## Testes com dispositivos:
 O projeto foi testado nos seguintes dispositivos:
-- Samsung J5 (Real)
 - Samsung A20s (Real)
-- iPhone 8 (Simulador)
+- iPhone 14 (Real)

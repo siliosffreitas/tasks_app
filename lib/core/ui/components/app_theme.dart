@@ -82,6 +82,7 @@ final ThemeData makeDefaultAppTheme = ThemeData(
     // ),
   ),
   inputDecorationTheme: InputDecorationTheme(
+    filled: true,
     focusedBorder: OutlineInputBorder(
       borderSide: const BorderSide(
         color: _primaryColor,

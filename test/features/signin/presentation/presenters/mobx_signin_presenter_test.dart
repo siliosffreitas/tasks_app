@@ -212,4 +212,10 @@ void main() {
 
     expect(sut.navigateTo, '/home');
   });
+
+  test('Should show explanation password', () {
+    sut.goPasswordStrongExplanation();
+
+    expect(sut.navigateTo, '/how_get_strong_password');
+  });
 }

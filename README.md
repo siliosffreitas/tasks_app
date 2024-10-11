@@ -28,7 +28,7 @@ Para compilar este projeto, certifique-se de ter a versão 2.10.0 do Flutter ins
 5. Uso do Flutter Modular para injeção de dependências (soli**D**). Todas as dependências nas classes são injetadas por quem utiliza-as, facilitando assim a criação dos testes
 6. Arquitetura Limpa e princípios do SOLID. A Arquitetura seguida foi a proposta por **Uncle Bob Martin** levemente adaptado. 
 
-<img src="screenshots/topology.png" width="400" title="Topologia"/>
+<img src="screenshots/topology.png" width="800" title="Topologia"/>
 
 ## Preview
 

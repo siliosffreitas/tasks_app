@@ -22,11 +22,11 @@ class TaskPage extends StatelessWidget {
         title: const Text('Tarefa'),
       ),
       body: Builder(builder: (context) {
-        reaction((_) => presenter.isLoading, (_) {
+        autorun((_) {
           if (presenter.isLoading) {
-            showLoading(context);
+            SpinnerDialog.showLoading(context);
           } else {
-            hideLoading(context);
+            SpinnerDialog.hideLoading(context);
           }
         });
         presenter.loadTask(taskId);

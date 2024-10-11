@@ -7,9 +7,9 @@ mixin LoadingManager {
     stream.listen(
       (bool isLoading) {
         if (isLoading) {
-          showLoading(context);
+          SpinnerDialog.showLoading(context);
         } else {
-          hideLoading(context);
+          SpinnerDialog.hideLoading(context);
         }
       },
     );

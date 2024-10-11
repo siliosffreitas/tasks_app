@@ -21,11 +21,11 @@ class LoginPage extends StatelessWidget with LoadingManager, UiErrorManager {
           }
         });
 
-        reaction((_) => presenter.isLoading, (_) {
+        autorun((_) {
           if (presenter.isLoading) {
-            showLoading(context);
+            SpinnerDialog.showLoading(context);
           } else {
-            hideLoading(context);
+            SpinnerDialog.hideLoading(context);
           }
         });
 

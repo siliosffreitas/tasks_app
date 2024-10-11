@@ -221,17 +221,31 @@ void main() {
       expect(button.onPressed, null);
     },
   );
-  // testWidgets(
-  //   'Should present loading',
-  //   (WidgetTester tester) async {
-  //     when(() => presenter.isLoading).thenReturn(true);
-  //     await loadPage(tester);
+  testWidgets(
+    'Should present loading',
+    (WidgetTester tester) async {
+      when(() => presenter.isLoading).thenReturn(true);
 
-  //     await tester.pump(Duration.zero);
+      await loadPage(tester);
 
-  //     expect(find.byType(CircularProgressIndicator), findsOneWidget);
-  //   },
-  // );
+      await tester.pump(Duration.zero);
+
+      expect(find.byType(CircularProgressIndicator), findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    'Should hide loading',
+    (WidgetTester tester) async {
+      when(() => presenter.isLoading).thenReturn(false);
+
+      await loadPage(tester);
+
+      await tester.pump(Duration.zero);
+
+      expect(find.byType(CircularProgressIndicator), findsNothing);
+    },
+  );
 
   testWidgets(
     'Should call authentication on form submit',

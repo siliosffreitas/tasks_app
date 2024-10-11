@@ -21,7 +21,7 @@ class LoadTasksRemoteDataSourceFirebase implements LoadTasksRemoteDataSource {
     final snapshots = await firestore
         .collection('tasks')
         .where('user', isEqualTo: user)
-        // .orderBy('created_at')
+        .orderBy('created_at')
         .get();
     final list = snapshots.docs.map((doc) {
       final Map<String, dynamic> data = doc.data();

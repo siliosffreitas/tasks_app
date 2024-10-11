@@ -63,7 +63,7 @@ void main() {
     when((() => firestore.collection(any()))).thenReturn(collection);
     when(() => collection.where(any(), isEqualTo: any(named: 'isEqualTo')))
         .thenReturn(query);
-    when(() => collection.orderBy(any())).thenReturn(query);
+    when(() => query.orderBy(any())).thenReturn(query);
 
     when(() => query.get()).thenAnswer((_) async => querySnapshot);
     when(() => querySnapshot.docs).thenReturn([doc]);

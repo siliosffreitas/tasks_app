@@ -2,30 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tasks_app/features/home/data/models/task_model.dart';
 import 'package:tasks_app/features/task/data/datasources/load_task_remote_datasource.dart';
 import 'package:test/test.dart';
-import 'package:faker/faker.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockFirebaseFirestore extends Mock implements FirebaseFirestore {}
-
-class MockCollectionReference extends Mock
-    implements CollectionReference<Map<String, dynamic>> {}
-
-class MockDocumentReference extends Mock
-    implements DocumentReference<Map<String, dynamic>> {}
-
-class MockDocumentSnapshot extends Mock
-    implements DocumentSnapshot<Map<String, dynamic>> {
-  @override
-  String get id => 'siliosilio';
-
-  @override
-  Map<String, dynamic> data() {
-    return {
-      'title': 'que mock grande!',
-      'description': 'que mock grande, descicao!',
-    };
-  }
-}
+import '../../../../mocks/firebase/mock_collection_reference.dart';
+import '../../../../mocks/firebase/mock_document_reference.dart';
+import '../../../../mocks/firebase/mock_document_snapshot.dart';
+import '../../../../mocks/firebase/mock_firebase_firestore.dart';
 
 void main() {
   late LoadTaskRemoteDataSourceFirebase sut;

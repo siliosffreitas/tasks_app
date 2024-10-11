@@ -5,36 +5,13 @@ import 'package:tasks_app/features/home/data/datasources/load_tasks_remote_datas
 import 'package:tasks_app/features/home/data/models/task_model.dart';
 import 'package:test/test.dart';
 
-class MockFirebaseFirestore extends Mock implements FirebaseFirestore {}
-
-class MockFirebaseAuth extends Mock implements FirebaseAuth {}
-
-class MockCollectionReference extends Mock
-    implements CollectionReference<Map<String, dynamic>> {}
-
-class MockQuery extends Mock implements Query<Map<String, dynamic>> {}
-
-class MockQueryDocumentSnapshot extends Mock
-    implements QueryDocumentSnapshot<Map<String, dynamic>> {
-  @override
-  String get id => 'siliosilio';
-
-  @override
-  Map<String, dynamic> data() {
-    return {
-      'title': 'que mock grande!',
-      'description': 'que mock grande, descicao!',
-    };
-  }
-}
-
-class MockQuerySnapshot extends Mock
-    implements QuerySnapshot<Map<String, dynamic>> {}
-
-class MockUser extends Mock implements User {
-  @override
-  String get uid => 'siliosiliosilio';
-}
+import '../../../../mocks/firebase/mock_collection_reference.dart';
+import '../../../../mocks/firebase/mock_firebase_auth.dart';
+import '../../../../mocks/firebase/mock_firebase_firestore.dart';
+import '../../../../mocks/firebase/mock_query.dart';
+import '../../../../mocks/firebase/mock_query_document_snapshot.dart';
+import '../../../../mocks/firebase/mock_query_snapshot.dart';
+import '../../../../mocks/firebase/mock_user.dart';
 
 void main() {
   late LoadTasksRemoteDataSourceFirebase sut;

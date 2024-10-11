@@ -3,7 +3,7 @@ import 'package:tasks_app/features/home/data/datasources/logout_remote_datasourc
 import 'package:test/test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockFirebaseAuth extends Mock implements FirebaseAuth {}
+import '../../../../mocks/firebase/mock_firebase_auth.dart';
 
 void main() {
   late LogoutRemoteDataSourceFirebase sut;

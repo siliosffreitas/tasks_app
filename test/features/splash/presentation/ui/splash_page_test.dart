@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:faker/faker.dart';
 import 'package:tasks_app/features/splash/presentation/presenters/mobx_splash_presenter.dart';
 import 'package:tasks_app/features/splash/presentation/ui/splash_page.dart';
 

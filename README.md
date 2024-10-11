@@ -55,3 +55,27 @@ Na pasta screenshots existem alguns prints tirados do app rodando e um vídeo co
 O projeto foi testado nos seguintes dispositivos:
 - Samsung A20s (Real)
 - iPhone 14 (Real)
+
+## Estatíticas a cerca do código
+### Cobertura de testes
+Apesar de não ter sido um requisito para o projeto, foi implementado também uma bateria de testes de unidade e de Widget que juntos cobrem cerca de **95%** do código. Anexo dois prints dos relatórios de cobertura: 
+- Com a própria ferramenta do Flutter:
+
+<img src="screenshots/tests_flutter.png" width="600" title="Detalhes de uma tarefa"/>
+
+- Com uma extensão do VSCode qu exibe uma visualização da cobertura em árvore:
+<img src="screenshots/tests_vscode.png" width="300" title="Detalhes de uma tarefa"/>
+
+---
+**NOTE**
+
+É possível executar os seguintes comandos para reproduzir essa saída fornecida nos prints acima:
+
+
+`flutter test --coverage`
+
+`genhtml coverage/lcov.info -o coverage/html`
+
+`open coverage/html/index.html`
+
+---

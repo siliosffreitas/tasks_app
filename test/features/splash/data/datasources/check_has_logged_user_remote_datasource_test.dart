@@ -4,12 +4,8 @@ import 'package:tasks_app/features/auth/data/models/account_model.dart';
 import 'package:tasks_app/features/splash/data/datasources/check_has_logged_user_remote_datasource.dart';
 import 'package:test/test.dart';
 
-class MockFirebaseAuth extends Mock implements FirebaseAuth {}
-
-class MockUser extends Mock implements User {
-  @override
-  String? get email => 'siliosffreitas@gmail.com';
-}
+import '../../../../mocks/firebase/mock_firebase_auth.dart';
+import '../../../../mocks/firebase/mock_user.dart';
 
 void main() {
   late CheckHasLoggedUserRemoteDataSourceFirebase sut;

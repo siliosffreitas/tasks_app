@@ -7,6 +7,9 @@ import 'package:tasks_app/features/new_task/data/datasources/create_task_remote_
 import 'package:test/test.dart';
 import 'package:faker/faker.dart';
 
+import '../../../../mocks/firebase/mock_collection_reference.dart';
+import '../../../../mocks/firebase/mock_document_reference.dart';
+
 class MockFirebaseAuth extends Mock implements FirebaseAuth {
   @override
   User? get currentUser => MockUser();
@@ -21,12 +24,6 @@ class MockUser extends Mock implements User {
 }
 
 class MockFirebaseFirestore extends Mock implements FirebaseFirestore {}
-
-class MockCollectionReference extends Mock
-    implements CollectionReference<Map<String, dynamic>> {}
-
-class MockDocumentReference extends Mock
-    implements DocumentReference<Map<String, dynamic>> {}
 
 void main() {
   late CreateTaskRemoteDataSourceFirebase datasource;

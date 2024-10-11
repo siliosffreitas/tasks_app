@@ -11,18 +11,8 @@ import 'package:test/test.dart';
 import 'package:faker/faker.dart';
 
 import '../../../../fixtures/fixture_reader.dart';
-
-class MockFirebaseAuth extends Mock implements FirebaseAuth {}
-
-class MockUser extends Mock implements User {
-  @override
-  String? get email => 'siliosffreitas@gmail.com';
-}
-
-class MockUserCredential extends Mock implements UserCredential {
-  @override
-  User? get user => MockUser();
-}
+import '../../../../mocks/firebase/mock_firebase_auth.dart';
+import '../../../../mocks/firebase/mock_user_credentials.dart';
 
 void main() {
   late AddAccountRemoteDataSourceFirebase datasource;

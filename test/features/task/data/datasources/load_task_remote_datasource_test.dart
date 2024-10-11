@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:tasks_app/features/home/data/models/task_model.dart';
 import 'package:tasks_app/features/task/data/datasources/load_task_remote_datasource.dart';
 import 'package:test/test.dart';
 import 'package:faker/faker.dart';
@@ -40,7 +41,7 @@ void main() {
     sut = LoadTaskRemoteDataSourceFirebase(
       firestore: firestore,
     );
-    tTaskId = faker.guid.guid();
+    tTaskId = 'siliosilio';
     collection = MockCollectionReference();
     doc = MockDocumentReference();
     docSnap = MockDocumentSnapshot();
@@ -53,5 +54,16 @@ void main() {
   test('Should call current user from firebase', () async {
     await sut.load(tTaskId);
     verify(() => firestore.collection('tasks')).called(1);
+  });
+
+  test('Should return task ', () async {
+    final result = await sut.load(tTaskId);
+    expect(
+        result,
+        const TaskModel(
+          id: 'siliosilio',
+          title: 'que mock grande!',
+          description: 'que mock grande, descicao!',
+        ));
   });
 }

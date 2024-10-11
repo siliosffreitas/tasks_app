@@ -223,6 +223,13 @@ void main() {
       await tester.pump(Duration.zero);
 
       expect(find.text('any error'), findsOneWidget);
+
+      final button = find.text('OK');
+      await tester.ensureVisible(button);
+      await tester.tap(button);
+      await tester.pump();
+
+      expect(find.text('any error'), findsNothing);
     },
   );
 }

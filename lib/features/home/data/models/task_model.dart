@@ -1,7 +1,7 @@
 import '../../domain/entities/task_entity.dart';
 
 class TaskModel extends TaskEntity {
-  TaskModel(
+  const TaskModel(
       {required String id, required String title, required String description})
       : super(
           id: id,

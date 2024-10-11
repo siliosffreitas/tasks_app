@@ -10,18 +10,18 @@ Para compilar este projeto, certifique-se de ter a versão 2.10.0 do Flutter ins
 ## Requisitos:
 1. Uso do Crashlytics e Analytics como log de eventos e de erros
 
-<img src="screenshots/crashlytics.png" width="400" title="crashlytics"/>
+<img src="screenshots/crashlytics.png" width="800" title="crashlytics"/>
 
-<img src="screenshots/analytics.png" width="400" title="analytics"/>
+<img src="screenshots/analytics.png" width="800" title="analytics"/>
 
 2. Uso do Firebase para autenticação do usuário
 
-<img src="screenshots/firebase_auth.png" width="400" title="Authentication"/>
+<img src="screenshots/firebase_auth.png" width="800" title="Authentication"/>
 
 3. Uso do Cloud Firestore como banco de dados 
 
 
-<img src="screenshots/cloud_firestore.png" width="400" title="Cloud Firestore"/>
+<img src="screenshots/cloud_firestore.png" width="800" title="Cloud Firestore"/>
 
 4. O Mobx está sendo utilzado como gerenciador de estado das telas, ele representa a camada de **Presenter**, que será exlicado logo mais na sessão de arquitetura.
 
@@ -63,7 +63,7 @@ O projeto foi testado nos seguintes dispositivos:
 Apesar de não ter sido um requisito para o projeto, foi implementado também uma bateria de testes contendo 184 testes de unidade e de Widget que juntos cobrem cerca de **95%** do código. Anexo dois prints dos relatórios de cobertura: 
 - Com a própria ferramenta do Flutter:
 
-<img src="screenshots/tests_flutter.png" width="600" title="Detalhes de uma tarefa"/>
+<img src="screenshots/tests_flutter.png" width="800" title="Detalhes de uma tarefa"/>
 
 - Com uma extensão do VSCode qu exibe uma visualização da cobertura em árvore:
 <img src="screenshots/tests_vscode.png" width="300" title="Detalhes de uma tarefa"/>

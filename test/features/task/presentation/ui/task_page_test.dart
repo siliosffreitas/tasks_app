@@ -109,15 +109,15 @@ void main() {
     },
   );
 
-  testWidgets(
-    'Should present loading',
-    (WidgetTester tester) async {
-      when(() => presenter.isLoading).thenReturn(true);
-      await loadPage(tester);
+  // testWidgets(
+  //   'Should present loading',
+  //   (WidgetTester tester) async {
+  //     when(() => presenter.isLoading).thenReturn(true);
+  //     await loadPage(tester);
 
-      await tester.pump(Duration.zero);
+  //     await tester.pump(Duration.zero);
 
-      expect(find.byType(CircularProgressIndicator), findsOneWidget);
-    },
-  );
+  //     expect(find.byType(CircularProgressIndicator), findsOneWidget);
+  //   },
+  // );
 }

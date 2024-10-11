@@ -120,7 +120,7 @@ class SigninPage extends StatelessWidget with LoadingManager, UiErrorManager {
                             onPressed: presenter.isFormValid == true
                                 ? presenter.auth
                                 : null,
-                            child: const Text('Entrar')),
+                            child: const Text('Criar Conta')),
                       ),
                     ],
                   ),

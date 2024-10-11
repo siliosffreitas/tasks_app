@@ -218,4 +218,22 @@ void main() {
 
     expect(sut.navigateTo, '/how_get_strong_password');
   });
+
+// teste adicionado apenas para que os arquivos gerados do MobX
+// TAMBÉM tenham cobertura completa
+
+  test('Should return string', () {
+    expect(sut.toString(), '''
+isLoading: ${sut.isLoading},
+mainError: ${sut.mainError},
+navigateTo: ${sut.navigateTo},
+username: ${sut.username},
+password: ${sut.password},
+passwordConfirmation: ${sut.passwordConfirmation},
+usernameError: ${sut.usernameError},
+passwordError: ${sut.passwordError},
+passwordConfirmationError: ${sut.passwordConfirmationError},
+isFormValid: ${sut.isFormValid}
+    ''');
+  });
 }

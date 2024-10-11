@@ -133,4 +133,15 @@ void main() {
 
     expect(sut.navigateTo, '/login');
   });
+
+// teste adicionado apenas para que os arquivos gerados do MobX
+// TAMBÉM tenham cobertura completa
+  test('Should return string', () {
+    expect(sut.toString(), '''
+mainError: ${sut.mainError},
+isLoading: ${sut.isLoading},
+navigateTo: ${sut.navigateTo},
+tasks: ${sut.tasks}
+    ''');
+  });
 }

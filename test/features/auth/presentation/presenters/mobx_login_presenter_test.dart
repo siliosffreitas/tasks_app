@@ -163,4 +163,19 @@ void main() {
       expect(sut.navigateTo, '/home');
     },
   );
+
+  // teste adicionado apenas para que os arquivos gerados do MobX
+// TAMBÉM tenham cobertura completa
+  test('Should return string', () {
+    expect(sut.toString(), '''
+isLoading: ${sut.isLoading},
+mainError: ${sut.mainError},
+navigateTo: ${sut.navigateTo},
+username: ${sut.username},
+password: ${sut.password},
+usernameError: ${sut.usernameError},
+passwordError: ${sut.passwordError},
+isFormValid: ${sut.isFormValid}
+    ''');
+  });
 }

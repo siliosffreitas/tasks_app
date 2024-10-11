@@ -143,4 +143,20 @@ void main() {
       expect(sut.navigateTo, '/success');
     },
   );
+
+  // teste adicionado apenas para que os arquivos gerados do MobX
+// TAMBÉM tenham cobertura completa
+
+  test('Should return string', () {
+    expect(sut.toString(), '''
+isLoading: ${sut.isLoading},
+mainError: ${sut.mainError},
+navigateTo: ${sut.navigateTo},
+title: ${sut.title},
+description: ${sut.description},
+titleError: ${sut.titleError},
+descriptionError: ${sut.descriptionError},
+isFormValid: ${sut.isFormValid}
+    ''');
+  });
 }

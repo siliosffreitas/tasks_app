@@ -13,7 +13,7 @@ abstract class _MobxSignPresenter with Store {
   _MobxSignPresenter({required this.usecase});
 
   @computed
-  String get usernameError => username == null
+  String? get usernameError => username == null
       ? ''
       : username!.isEmpty
           ? 'E-mail obrigatório'
@@ -22,7 +22,7 @@ abstract class _MobxSignPresenter with Store {
               : 'E-mail inválido';
 
   @computed
-  String get passwordError => password == null
+  String? get passwordError => password == null
       ? ''
       : password!.isEmpty
           ? 'Senha obrigatória'
@@ -31,7 +31,7 @@ abstract class _MobxSignPresenter with Store {
               : 'Senha fraca';
 
   @computed
-  String get passwordConfirmationError => passwordConfirmation == null
+  String? get passwordConfirmationError => passwordConfirmation == null
       ? ''
       : passwordConfirmation!.isEmpty
           ? 'Confirmação obrigatória'
@@ -40,7 +40,7 @@ abstract class _MobxSignPresenter with Store {
               : 'Confirmação errada';
 
   @computed
-  bool get isFormValid =>
+  bool? get isFormValid =>
       username != null &&
       password != null &&
       passwordConfirmation != null &&

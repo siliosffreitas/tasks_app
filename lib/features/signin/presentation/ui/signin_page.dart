@@ -71,7 +71,7 @@ class SigninPage extends StatelessWidget with LoadingManager, UiErrorManager {
                         builder: (_) => TextFormField(
                           decoration: InputDecoration(
                             hintText: 'E-mail',
-                            errorText: presenter.usernameError.isEmpty == true
+                            errorText: presenter.usernameError?.isEmpty == true
                                 ? null
                                 : presenter.usernameError,
                           ),
@@ -85,7 +85,7 @@ class SigninPage extends StatelessWidget with LoadingManager, UiErrorManager {
                         builder: (_) => TextFormField(
                           decoration: InputDecoration(
                             hintText: 'Senha',
-                            errorText: presenter.passwordError.isEmpty == true
+                            errorText: presenter.passwordError?.isEmpty == true
                                 ? null
                                 : presenter.passwordError,
                             suffixIcon: IconButton(
@@ -105,7 +105,7 @@ class SigninPage extends StatelessWidget with LoadingManager, UiErrorManager {
                           decoration: InputDecoration(
                             hintText: 'Confirmação da Senha',
                             errorText:
-                                presenter.passwordConfirmationError.isEmpty ==
+                                presenter.passwordConfirmationError?.isEmpty ==
                                         true
                                     ? null
                                     : presenter.passwordConfirmationError,

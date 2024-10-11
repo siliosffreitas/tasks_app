@@ -10,7 +10,7 @@ void main() {
   late TaskModel tTaskModel;
 
   setUp(() {
-    tTaskModel = TaskModel(
+    tTaskModel = const TaskModel(
         id: 'abs:123',
         title: 'Finalizar este desafio',
         description: 'Logo logo');

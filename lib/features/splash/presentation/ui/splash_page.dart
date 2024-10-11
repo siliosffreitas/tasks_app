@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mobx/mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mobx/mobx.dart';
 
 import '../presenters/mobx_splash_presenter.dart';
 

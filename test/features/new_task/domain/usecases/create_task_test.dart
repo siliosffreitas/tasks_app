@@ -1,4 +1,3 @@
-import 'package:tasks_app/features/auth/domain/entities/index.dart';
 import 'package:tasks_app/features/new_task/domain/repositories/create_task_repository.dart';
 import 'package:tasks_app/features/new_task/domain/usecases/create_task.dart';
 import 'package:test/test.dart';

@@ -1,10 +1,8 @@
-import '../../domain/entities/account_entity.dart';
-
-import '../../../../core/error/failures.dart';
-
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/exceptions.dart';
+import '../../../../core/error/failures.dart';
+import '../../domain/entities/account_entity.dart';
 import '../../domain/repositories/index.dart';
 import '../datasources/authentication_remote_datasource.dart';
 

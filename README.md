@@ -48,6 +48,9 @@ Na pasta screenshots existem alguns prints tirados do app rodando e um vídeo co
 ### Detalhes de uma tarefa
 <img src="screenshots/task.png" width="400" title="Detalhes de uma tarefa"/>
 
+## DEMO
+<video src="screenshots/demo.mp4" width="400"  controls></video>
+
 ## Testes com dispositivos:
 O projeto foi testado nos seguintes dispositivos:
 - Samsung A20s (Real)

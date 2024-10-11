@@ -1,6 +1,6 @@
 import 'package:mobx/mobx.dart';
-import '../../../../core/usecases/usecase.dart';
 
+import '../../../../core/usecases/usecase.dart';
 import '../../domain/usecases/check_has_logged_user.dart';
 
 part 'mobx_splash_presenter.g.dart';

@@ -1,8 +1,7 @@
-import '../../../../core/error/failures.dart';
-
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/exceptions.dart';
+import '../../../../core/error/failures.dart';
 import '../../domain/repositories/logout_repository.dart';
 import '../datasources/logout_remote_datasource.dart';
 

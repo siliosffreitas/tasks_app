@@ -18,7 +18,7 @@ class SigninPage extends StatelessWidget with LoadingManager, UiErrorManager {
         title: const Text('Crie sua conta fácil'),
       ),
       body: Builder(builder: (context) {
-        reaction((_) => presenter.mainError, (_) {
+        autorun((_) {
           if (presenter.mainError != null) {
             showMessage(context, presenter.mainError!);
           }

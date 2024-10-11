@@ -277,4 +277,16 @@ void main() {
       verify(() => presenter.goPasswordStrongExplanation()).called(1);
     },
   );
+  testWidgets(
+    'Should present error',
+    (WidgetTester tester) async {
+      when(() => presenter.mainError).thenReturn('any error');
+
+      await loadPage(tester);
+
+      await tester.pump(Duration.zero);
+
+      expect(find.text('any error'), findsOneWidget);
+    },
+  );
 }

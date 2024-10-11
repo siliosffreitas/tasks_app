@@ -18,7 +18,7 @@ class NewTaskPage extends StatelessWidget with LoadingManager, UiErrorManager {
         title: const Text('Nova tarefa'),
       ),
       body: Builder(builder: (context) {
-        reaction((_) => presenter.mainError, (_) {
+        autorun((_) {
           if (presenter.mainError != null) {
             showMessage(context, presenter.mainError!);
           }

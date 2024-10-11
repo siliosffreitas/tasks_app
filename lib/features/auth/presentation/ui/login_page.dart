@@ -15,7 +15,7 @@ class LoginPage extends StatelessWidget with LoadingManager, UiErrorManager {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Builder(builder: (context) {
-        reaction((_) => presenter.mainError, (_) {
+        autorun((_) {
           if (presenter.mainError != null) {
             showMessage(context, presenter.mainError!);
           }

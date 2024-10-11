@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:tasks_app/features/home/data/datasources/load_tasks_remote_datasource.dart';
+import 'package:tasks_app/features/home/data/models/task_model.dart';
 import 'package:test/test.dart';
 
 class MockFirebaseFirestore extends Mock implements FirebaseFirestore {}
@@ -22,7 +23,7 @@ class MockQueryDocumentSnapshot extends Mock
   Map<String, dynamic> data() {
     return {
       'title': 'que mock grande!',
-      'description': 'que mock grande!',
+      'description': 'que mock grande, descicao!',
     };
   }
 }
@@ -71,5 +72,16 @@ void main() {
   test('Should call current user from firebase', () async {
     await sut.load();
     verify(() => firebase.currentUser).called(1);
+  });
+
+  test('Should return task list', () async {
+    final result = await sut.load();
+    expect(result, const [
+      TaskModel(
+        id: 'siliosilio',
+        title: 'que mock grande!',
+        description: 'que mock grande, descicao!',
+      )
+    ]);
   });
 }

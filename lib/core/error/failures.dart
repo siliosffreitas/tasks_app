@@ -17,10 +17,6 @@ class CacheFailure extends Failure {
   const CacheFailure() : super('Erro ao salvar dados no seu dispositivo');
 }
 
-class ConnectionFailure extends Failure {
-  const ConnectionFailure() : super('Sem conexão, verifique sua internet');
-}
-
 class UnauthorizedFailure extends Failure {
   const UnauthorizedFailure()
       : super(

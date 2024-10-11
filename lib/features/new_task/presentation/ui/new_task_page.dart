@@ -61,7 +61,7 @@ class NewTaskPage extends StatelessWidget with LoadingManager, UiErrorManager {
                         builder: (_) => TextFormField(
                           decoration: InputDecoration(
                             hintText: 'Título',
-                            errorText: presenter.titleError.isEmpty == true
+                            errorText: presenter.titleError?.isEmpty == true
                                 ? null
                                 : presenter.titleError,
                           ),
@@ -79,7 +79,7 @@ class NewTaskPage extends StatelessWidget with LoadingManager, UiErrorManager {
                             decoration: InputDecoration(
                               hintText: 'Descrição',
                               errorText:
-                                  presenter.descriptionError.isEmpty == true
+                                  presenter.descriptionError?.isEmpty == true
                                       ? null
                                       : presenter.descriptionError,
                             ),

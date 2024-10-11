@@ -29,7 +29,7 @@ final ThemeData makeDefaultAppTheme = ThemeData(
   // ),
   appBarTheme: const AppBarTheme(
     centerTitle: true,
-    elevation: 0,
+
     color: _primaryColor,
     iconTheme: IconThemeData(
       color: Colors.black,

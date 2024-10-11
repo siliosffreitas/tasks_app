@@ -48,18 +48,25 @@ class AppModule extends Module {
   List<Bind> get binds => [
         // controllers
         Bind<MobxSplashPresenter>(
-            (_) => MobxSplashPresenter(Modular.get<CheckHasLoggedUser>())),
+            (_) => MobxSplashPresenter(Modular.get<CheckHasLoggedUser>()),
+            isSingleton: false),
         Bind<MobxLoginPresenter>(
             (_) => MobxLoginPresenter(usecase: Modular.get<Authentication>()),
             isSingleton: false),
         Bind<MobxSigninPresenter>(
-            (_) => MobxSigninPresenter(usecase: Modular.get<AddAccount>())),
-        Bind<MobxHomePresenter>((_) => MobxHomePresenter(
-              logoutUsecase: Modular.get<Logout>(),
-              loadTasksUsecase: Modular.get<LoadTasks>(),
-            )),
+            (_) => MobxSigninPresenter(
+                  usecase: Modular.get<AddAccount>(),
+                ),
+            isSingleton: false),
+        Bind<MobxHomePresenter>(
+            (_) => MobxHomePresenter(
+                  logoutUsecase: Modular.get<Logout>(),
+                  loadTasksUsecase: Modular.get<LoadTasks>(),
+                ),
+            isSingleton: false),
         Bind<MobxNewTaskPresenter>(
-            (_) => MobxNewTaskPresenter(usecase: Modular.get<CreateTask>())),
+            (_) => MobxNewTaskPresenter(usecase: Modular.get<CreateTask>()),
+            isSingleton: false),
 
         Bind<MobxTaskPresenter>(
             (_) => MobxTaskPresenter(usecase: Modular.get<LoadTask>())),

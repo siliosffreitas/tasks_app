@@ -49,6 +49,8 @@ Na pasta screenshots existem alguns prints tirados do app rodando e um vídeo co
 <img src="screenshots/task.png" width="400" title="Detalhes de uma tarefa"/>
 
 ## DEMO
+Caso o vídeo não abra diretamente abaixo, você pode visualizar uma demonstração completa na **pasta screenshots, o arquivo demo.mp4** ou cliando <a href="screenshots/demo.mp4">aqui</a>.
+
 <video src="screenshots/demo.mp4" width="400"  controls></video>
 
 ## Testes com dispositivos:

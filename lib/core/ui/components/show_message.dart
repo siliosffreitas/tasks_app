@@ -12,7 +12,7 @@ Future<void> showMessage(
     builder: (BuildContext context) {
       // retorna um objeto do tipo Dialog
       return AlertDialog(
-        title: const Text("Atenção"),
+        title: const Text('Atenção'),
         content: Text(message),
         actions: <Widget>[
           TextButton(

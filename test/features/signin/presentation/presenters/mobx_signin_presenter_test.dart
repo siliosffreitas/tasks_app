@@ -5,30 +5,30 @@ import 'package:faker/faker.dart';
 import 'package:dartz/dartz.dart';
 import 'package:tasks_app/core/error/failures.dart';
 import 'package:tasks_app/features/auth/domain/entities/index.dart';
-import 'package:tasks_app/features/auth/domain/usecases/authentication.dart';
-import 'package:tasks_app/features/auth/presentation/presenters/mobx_login_presenter.dart';
+import 'package:tasks_app/features/signin/domain/usecases/add_account.dart';
+import 'package:tasks_app/features/signin/presentation/presenters/mobx_signin_presenter.dart';
 
-class MockAuthentication extends Mock implements Authentication {}
+class MockAddAccount extends Mock implements AddAccount {}
 
 void main() {
-  late MobxLoginPresenter sut;
-  late Authentication usecase;
+  late MobxSigninPresenter sut;
+  late AddAccount usecase;
   late String tUsername;
   late String tPassword;
   late AccountEntity tAccount;
 
   setUpAll(() {
     tUsername = faker.internet.email();
-    tPassword = faker.internet.password();
-    registerFallbackValue(AuthenticationParams(
+    tPassword = 'Silio123\$';
+    registerFallbackValue(AddAccountParams(
       username: tUsername,
       password: tPassword,
     ));
   });
 
   setUp(() {
-    usecase = MockAuthentication();
-    sut = MobxLoginPresenter(
+    usecase = MockAddAccount();
+    sut = MobxSigninPresenter(
       usecase: usecase,
     );
 
@@ -81,7 +81,7 @@ void main() {
   );
 
   test(
-    'Should emit corret events when validate password fails invalid',
+    'Should emit corret events when validate password fails empty',
     () {
       sut.validatePassword('');
 
@@ -92,43 +92,85 @@ void main() {
   );
 
   test(
+    'Should emit corret events when validate password fails invalid',
+    () {
+      sut.validatePassword('12345');
+
+      expect(sut.password, '12345');
+      expect(sut.passwordError, 'Senha fraca');
+      expect(sut.isFormValid, false);
+    },
+  );
+
+  test(
+    'Should emit corret events when validate confirmation fails empty',
+    () {
+      sut.validatePasswordConfirmation('');
+
+      expect(sut.passwordConfirmation, '');
+      expect(sut.passwordConfirmationError, 'Confirmação obrigatória');
+      expect(sut.isFormValid, false);
+    },
+  );
+
+  test(
+    'Should emit corret events when validate confirmation fails invalid',
+    () {
+      sut.validatePassword('Silio123#');
+      sut.validatePasswordConfirmation('Silio123');
+
+      expect(sut.passwordConfirmation, 'Silio123');
+      expect(sut.passwordConfirmationError, 'Confirmação errada');
+      expect(sut.isFormValid, false);
+    },
+  );
+
+  test(
+    'Should emit corret events when validate confirmation ',
+    () {
+      sut.validatePassword('Silio123#');
+      sut.validatePasswordConfirmation('Silio123#');
+
+      expect(sut.passwordConfirmation, 'Silio123#');
+      expect(sut.passwordConfirmationError, '');
+      expect(sut.isFormValid, false);
+    },
+  );
+
+  test(
     'Should emit isFormValid as true if username and password have no errors',
     () {
       sut.validateUserName(tUsername);
       sut.validatePassword(tPassword);
+      sut.validatePasswordConfirmation(tPassword);
 
       expect(sut.isFormValid, true);
     },
   );
 
-  test('Should go to signin page', () {
-    sut.goToSigninPage();
-
-    expect(sut.navigateTo, '/signin');
-  });
-
   test(
     'Should call usecase with correct values',
     () async {
       sut.validateUserName(tUsername);
-
       sut.validatePassword(tPassword);
+      sut.validatePasswordConfirmation(tPassword);
 
       await sut.auth();
 
       verify(() => usecase(
-              AuthenticationParams(username: tUsername, password: tPassword)))
+              AddAccountParams(username: tUsername, password: tPassword)))
           .called(1);
     },
   );
 
   test(
-    'Should emit correct events on usecase invalidCredentialsError',
+    'Should emit correct events on authentication invalidCredentialsError',
     () async {
       when(() => usecase(any()))
           .thenAnswer((_) async => const Left(UnauthorizedFailure()));
       sut.validateUserName(tUsername);
       sut.validatePassword(tPassword);
+      sut.validatePasswordConfirmation(tPassword);
 
       await sut.auth();
 
@@ -138,13 +180,14 @@ void main() {
   );
 
   test(
-    'Should emit correct events on usecase ServerFailure',
+    'Should emit correct events on authentication ServerFailure',
     () async {
       when(() => usecase(any()))
           .thenAnswer((_) async => const Left(ServerFailure('Server error')));
 
       sut.validateUserName(tUsername);
       sut.validatePassword(tPassword);
+      sut.validatePasswordConfirmation(tPassword);
 
       await sut.auth();
 
@@ -153,14 +196,20 @@ void main() {
   );
 
   test(
-    'Should change page on usecase success',
+    'Should change page on authentication success',
     () async {
       sut.validateUserName(tUsername);
       sut.validatePassword(tPassword);
 
       await sut.auth();
 
-      expect(sut.navigateTo, '/home');
+      expect(sut.navigateTo, '/success');
     },
   );
+
+  test('Should go to signin page', () {
+    sut.goHome();
+
+    expect(sut.navigateTo, '/home');
+  });
 }

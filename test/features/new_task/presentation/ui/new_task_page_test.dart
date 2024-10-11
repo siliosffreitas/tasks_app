@@ -3,22 +3,20 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:mocktail/mocktail.dart';
 import 'package:faker/faker.dart';
-import 'package:tasks_app/features/auth/domain/usecases/authentication.dart';
 
-import 'package:tasks_app/features/new_task/domain/usecases/create_task.dart';
 import 'package:tasks_app/features/new_task/presentation/presenters/mobx_new_task_presenter.dart';
 import 'package:tasks_app/features/new_task/presentation/ui/new_task_page.dart';
 
-class MockMobxNewTaskPresenter extends Mock implements MobxNewTaskPresenter {}
+class MockMobxNewTaskPresenter extends Mock implements MobxNewTaskPresenter {
+  MockMobxNewTaskPresenter() {
+    createTaskCall();
+  }
 
-class MockCreateTask extends Mock implements CreateTask {}
+  When _createTaskCall() => when(() => createTask());
+  void createTaskCall() => _createTaskCall().thenAnswer((_) async => _);
+}
 
 void main() {
-  setUpAll(() {
-    registerFallbackValue(
-        const AuthenticationParams(username: '', password: ''));
-  });
-
   late MobxNewTaskPresenter presenter;
 
   Future<void> loadPage(WidgetTester tester) async {
@@ -76,34 +74,20 @@ void main() {
   );
 
   testWidgets(
-    'Should present error if username is empty',
+    'Should present error if username is invalid',
     (WidgetTester tester) async {
-      presenter = MobxNewTaskPresenter(usecase: MockCreateTask());
+      when(() => presenter.titleError).thenReturn('any error');
       await loadPage(tester);
 
-      await tester.enterText(
-          find.bySemanticsLabel('Título'), 'siliosffreitas@gmail.com');
-
-      await tester.pump();
-
-      await tester.enterText(find.bySemanticsLabel('Título'), '');
-
-      await tester.pump();
-
-      expect(find.text('Título obrigatório'), findsOneWidget);
+      expect(find.text('any error'), findsOneWidget);
     },
   );
 
   testWidgets(
-    'Should not present error if username is valid',
+    'Should present no error if username valid (error null)',
     (WidgetTester tester) async {
-      presenter = MobxNewTaskPresenter(usecase: MockCreateTask());
+      when(() => presenter.titleError).thenReturn(null);
       await loadPage(tester);
-
-      await tester.enterText(
-          find.bySemanticsLabel('Título'), 'siliosffreitas@gmail.com');
-
-      await tester.pump();
 
       final emailTextChildren = find.descendant(
         of: find.bySemanticsLabel('Título'),
@@ -114,30 +98,48 @@ void main() {
   );
 
   testWidgets(
-    'Should present error if password is empty',
+    'Should presents no error if username valid (error empty)',
     (WidgetTester tester) async {
-      presenter = MobxNewTaskPresenter(usecase: MockCreateTask());
+      when(() => presenter.titleError).thenReturn('');
       await loadPage(tester);
 
-      await tester.enterText(find.bySemanticsLabel('Descrição'), 'Silio123\$');
-      await tester.pump();
-
-      await tester.enterText(find.bySemanticsLabel('Descrição'), '');
-      await tester.pump();
-
-      expect(find.text('Descrição obrigatória'), findsOneWidget);
+      final emailTextChildren = find.descendant(
+        of: find.bySemanticsLabel('Título'),
+        matching: find.byType(Text),
+      );
+      expect(emailTextChildren, findsOneWidget);
     },
   );
 
   testWidgets(
-    'Should not present error if password is valid',
+    'Should present error if password is invalid',
     (WidgetTester tester) async {
-      presenter = MobxNewTaskPresenter(usecase: MockCreateTask());
+      when(() => presenter.descriptionError).thenReturn('any error');
       await loadPage(tester);
 
-      await tester.enterText(find.bySemanticsLabel('Descrição'), 'Silio123\$');
+      expect(find.text('any error'), findsOneWidget);
+    },
+  );
 
-      await tester.pump();
+  testWidgets(
+    'Should present no error if password valid (error null)',
+    (WidgetTester tester) async {
+      when(() => presenter.descriptionError).thenReturn(null);
+      await loadPage(tester);
+
+      final emailTextChildren = find.descendant(
+        of: find.bySemanticsLabel('Descrição'),
+        matching: find.byType(Text),
+      );
+      expect(emailTextChildren, findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    'Should presents no error if password valid (error empty)',
+    (WidgetTester tester) async {
+      when(() => presenter.descriptionError).thenReturn('');
+      await loadPage(tester);
 
       final emailTextChildren = find.descendant(
         of: find.bySemanticsLabel('Descrição'),
@@ -150,15 +152,8 @@ void main() {
   testWidgets(
     'Should enable form button if form is valid',
     (WidgetTester tester) async {
-      presenter = MobxNewTaskPresenter(usecase: MockCreateTask());
+      when(() => presenter.isFormValid).thenReturn(true);
       await loadPage(tester);
-
-      await tester.enterText(
-          find.bySemanticsLabel('Título'), 'siliosffreitas@gmail.com');
-      await tester.pump();
-
-      await tester.enterText(find.bySemanticsLabel('Descrição'), 'Silio123\$');
-      await tester.pump();
 
       final button = tester.widget<ElevatedButton>(find.byType(ElevatedButton));
       expect(button.onPressed, isNotNull);
@@ -166,42 +161,20 @@ void main() {
   );
 
   testWidgets(
-    'Should disable form button if form is invalid 3',
+    'Should disable form button if form is invalid',
     (WidgetTester tester) async {
-      presenter = MobxNewTaskPresenter(usecase: MockCreateTask());
+      when(() => presenter.isFormValid).thenReturn(false);
       await loadPage(tester);
-
-      await tester.enterText(
-          find.bySemanticsLabel('Título'), 'siliosffreitas@gmail.com');
-      await tester.pump();
-
-      await tester.enterText(find.bySemanticsLabel('Descrição'), 'Silio123\$');
-      await tester.pump();
-
-      await tester.enterText(find.bySemanticsLabel('Descrição'), '');
-      await tester.pump();
 
       final button = tester.widget<ElevatedButton>(find.byType(ElevatedButton));
       expect(button.onPressed, null);
     },
   );
-
   // testWidgets(
   //   'Should present loading',
   //   (WidgetTester tester) async {
-  //     presenter = MobxNewTaskPresenter(usecase: MockCreateTask());
+  //     when(() => presenter.isLoading).thenReturn(true);
   //     await loadPage(tester);
-
-  //     await tester.enterText(
-  //         find.bySemanticsLabel('Título'), 'siliosffreitas@gmail.com');
-  //     await tester.pump();
-
-  //     await tester.enterText(find.bySemanticsLabel('Descrição'), 'Silio123\$');
-  //     await tester.pump();
-
-  //     final okButton = find.text('Entrar');
-
-  //     await tester.tap(okButton);
 
   //     await tester.pump(Duration.zero);
 
@@ -209,29 +182,20 @@ void main() {
   //   },
   // );
 
-  // testWidgets(
-  //   'Should change page',
-  //   (WidgetTester tester) async {
-  //     Authentication u = MockCreateTask();
-  //     when(() => u.call(any()))
-  //         .thenAnswer((_) async => Right(AccountEntity(accessToken: '')));
+  testWidgets(
+    'Should call authentication on form submit',
+    (WidgetTester tester) async {
+      when(() => presenter.isFormValid).thenReturn(true);
+      await loadPage(tester);
 
-  //     presenter = MobxNewTaskPresenter(usecase: u);
-  //     await loadPage(tester);
+      final button = find.byType(ElevatedButton);
 
-  //     await tester.enterText(
-  //         find.bySemanticsLabel('Título'), 'siliosffreitas@gmail.com');
-  //     await tester.pump();
+      await tester.ensureVisible(button);
 
-  //     await tester.enterText(find.bySemanticsLabel('Descrição'), 'Silio123\$');
-  //     await tester.pump();
+      await tester.tap(button);
+      await tester.pump();
 
-  //     final okButton = find.text('Entrar');
-
-  //     await tester.tap(okButton);
-  //     await tester.pump(Duration.zero);
-
-  //     expect(find.text('Home'), findsOneWidget);
-  //   },
-  // );
+      verify(() => presenter.createTask()).called(1);
+    },
+  );
 }

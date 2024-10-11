@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:tasks_app/features/auth/data/models/account_model.dart';
-import 'package:tasks_app/features/auth/domain/entities/index.dart';
+import 'package:tasks_app/features/auth/domain/entities/account_entity.dart';
 import 'package:test/test.dart';
 
 import '../../../../fixtures/fixture_reader.dart';

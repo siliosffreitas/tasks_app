@@ -1,5 +1,5 @@
 import 'package:tasks_app/core/usecases/usecase.dart';
-import 'package:tasks_app/features/auth/domain/entities/index.dart';
+import 'package:tasks_app/features/auth/domain/entities/account_entity.dart';
 import 'package:tasks_app/features/splash/domain/repositories/check_has_logged_user_repository.dart';
 import 'package:tasks_app/features/splash/domain/usecases/check_has_logged_user.dart';
 import 'package:test/test.dart';

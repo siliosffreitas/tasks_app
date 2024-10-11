@@ -4,7 +4,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:faker/faker.dart';
 import 'package:dartz/dartz.dart';
 import 'package:tasks_app/core/error/failures.dart';
-import 'package:tasks_app/features/auth/domain/entities/index.dart';
+import 'package:tasks_app/features/auth/domain/entities/account_entity.dart';
 import 'package:tasks_app/features/signin/domain/usecases/add_account.dart';
 import 'package:tasks_app/features/signin/presentation/presenters/mobx_signin_presenter.dart';
 

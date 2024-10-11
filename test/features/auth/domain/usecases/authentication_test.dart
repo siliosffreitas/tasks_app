@@ -1,5 +1,5 @@
-import 'package:tasks_app/features/auth/domain/entities/index.dart';
-import 'package:tasks_app/features/auth/domain/repositories/index.dart';
+import 'package:tasks_app/features/auth/domain/entities/account_entity.dart';
+import 'package:tasks_app/features/auth/domain/repositories/authentication_repository.dart';
 import 'package:tasks_app/features/auth/domain/usecases/authentication.dart';
 import 'package:test/test.dart';
 

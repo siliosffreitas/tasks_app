@@ -1,4 +1,4 @@
-import 'package:tasks_app/features/auth/domain/entities/index.dart';
+import 'package:tasks_app/features/auth/domain/entities/account_entity.dart';
 import 'package:tasks_app/features/signin/domain/repositories/add_account_repository.dart';
 import 'package:tasks_app/features/signin/domain/usecases/add_account.dart';
 import 'package:test/test.dart';

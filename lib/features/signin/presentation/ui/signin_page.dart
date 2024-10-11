@@ -5,11 +5,9 @@ import 'package:mobx/mobx.dart';
 
 import '../../../../core/ui/components/show_message.dart';
 import '../../../../core/ui/components/spinner_dialog.dart';
-import '../../../../core/ui/mixins/error_message_manager.dart';
-import '../../../../core/ui/mixins/loading_manager.dart';
 import '../presenters/mobx_signin_presenter.dart';
 
-class SigninPage extends StatelessWidget with LoadingManager, UiErrorManager {
+class SigninPage extends StatelessWidget {
   final MobxSigninPresenter presenter;
   const SigninPage({required this.presenter, Key? key}) : super(key: key);
 

@@ -5,11 +5,9 @@ import 'package:mobx/mobx.dart';
 
 import '../../../../core/ui/components/show_message.dart';
 import '../../../../core/ui/components/spinner_dialog.dart';
-import '../../../../core/ui/mixins/error_message_manager.dart';
-import '../../../../core/ui/mixins/loading_manager.dart';
 import '../presenters/mobx_new_task_presenter.dart';
 
-class NewTaskPage extends StatelessWidget with LoadingManager, UiErrorManager {
+class NewTaskPage extends StatelessWidget {
   final MobxNewTaskPresenter presenter;
   const NewTaskPage({required this.presenter, Key? key}) : super(key: key);
 

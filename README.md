@@ -58,7 +58,7 @@ O projeto foi testado nos seguintes dispositivos:
 
 ## Estatíticas a cerca do código
 ### Cobertura de testes
-Apesar de não ter sido um requisito para o projeto, foi implementado também uma bateria de testes de unidade e de Widget que juntos cobrem cerca de **95%** do código. Anexo dois prints dos relatórios de cobertura: 
+Apesar de não ter sido um requisito para o projeto, foi implementado também uma bateria de testes contendo 184 testes de unidade e de Widget que juntos cobrem cerca de **95%** do código. Anexo dois prints dos relatórios de cobertura: 
 - Com a própria ferramenta do Flutter:
 
 <img src="screenshots/tests_flutter.png" width="600" title="Detalhes de uma tarefa"/>

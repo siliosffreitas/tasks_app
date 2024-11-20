@@ -4,7 +4,6 @@ import '../../../../core/usecases/usecase.dart';
 import '../../domain/usecases/load_tasks.dart';
 import '../../domain/usecases/logout.dart';
 import '../ui/task_viewmodel.dart';
-import '../ui/task_viewmodel.dart';
 
 part 'mobx_home_presenter.g.dart';
 
@@ -13,6 +12,7 @@ class MobxHomePresenter = _MobxHomePresenter with _$MobxHomePresenter;
 abstract class _MobxHomePresenter with Store {
   final Logout logoutUsecase;
   final LoadTasks loadTasksUsecase;
+  var int _local;
 
   @observable
   String? mainError;

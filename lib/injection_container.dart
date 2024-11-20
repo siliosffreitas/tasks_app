@@ -47,28 +47,21 @@ class AppModule extends Module {
   @override
   List<Bind> get binds => [
         // controllers
-        Bind<MobxSplashPresenter>(
-            (_) => MobxSplashPresenter(Modular.get<CheckHasLoggedUser>()),
-            isSingleton: false),
-        Bind<MobxLoginPresenter>(
-            (_) => MobxLoginPresenter(usecase: Modular.get<Authentication>()),
-            isSingleton: false),
-        Bind<MobxSigninPresenter>(
-            (_) => MobxSigninPresenter(
-                  usecase: Modular.get<AddAccount>(),
-                ),
-            isSingleton: false),
-        Bind<MobxHomePresenter>(
-            (_) => MobxHomePresenter(
-                  logoutUsecase: Modular.get<Logout>(),
-                  loadTasksUsecase: Modular.get<LoadTasks>(),
-                ),
-            isSingleton: false),
-        Bind<MobxNewTaskPresenter>(
-            (_) => MobxNewTaskPresenter(usecase: Modular.get<CreateTask>()),
-            isSingleton: false),
+        Bind.factory<MobxSplashPresenter>(
+            (_) => MobxSplashPresenter(Modular.get<CheckHasLoggedUser>())),
 
-        Bind<MobxTaskPresenter>(
+        Bind.factory<MobxLoginPresenter>(
+            (_) => MobxLoginPresenter(usecase: Modular.get<Authentication>())),
+
+        Bind.factory<MobxSigninPresenter>(
+            (_) => MobxSigninPresenter(usecase: Modular.get<AddAccount>())),
+        Bind.factory<MobxHomePresenter>((_) => MobxHomePresenter(
+              logoutUsecase: Modular.get<Logout>(),
+              loadTasksUsecase: Modular.get<LoadTasks>(),
+            )),
+        Bind.factory<MobxNewTaskPresenter>(
+            (_) => MobxNewTaskPresenter(usecase: Modular.get<CreateTask>())),
+        Bind.factory<MobxTaskPresenter>(
             (_) => MobxTaskPresenter(usecase: Modular.get<LoadTask>())),
 
         // usecases
@@ -133,8 +126,8 @@ class AppModule extends Module {
             )),
 
         // extenals
-        Bind<FirebaseAuth>((_) => FirebaseAuth.instance),
-        Bind<FirebaseFirestore>((_) => FirebaseFirestore.instance),
+        Bind.singleton<FirebaseAuth>((_) => FirebaseAuth.instance),
+        Bind.singleton<FirebaseFirestore>((_) => FirebaseFirestore.instance),
       ];
 
   @override

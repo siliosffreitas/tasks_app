@@ -69,8 +69,8 @@ jobs:
       - run: flutter pub get
       - run: flutter clean
       - run: flutter build apk
-      - run: Upload apk
-      - uses: actions/upload-artifact@v3
+      - name: Upload apk
+        uses: actions/upload-artifact@v3
         with:
           name: apk
           path: build/app/outputs/flutter-apk/app-release.apk

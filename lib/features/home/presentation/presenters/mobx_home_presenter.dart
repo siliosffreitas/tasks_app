@@ -12,7 +12,6 @@ class MobxHomePresenter = _MobxHomePresenter with _$MobxHomePresenter;
 abstract class _MobxHomePresenter with Store {
   final Logout logoutUsecase;
   final LoadTasks loadTasksUsecase;
-  var int _local;
 
   @observable
   String? mainError;

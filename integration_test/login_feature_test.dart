@@ -11,7 +11,11 @@ void main() {
     app.main();
     await tester.pumpAndSettle();
 
-    await tester.tap(find.byType(TextButton));
+    final button = find.text('Criar conta');
+
+    await tester.ensureVisible(button);
+
+    await tester.tap(button);
 
     await tester.pumpAndSettle();
 
@@ -28,7 +32,9 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    await tester.tap(find.byType(ElevatedButton));
+    final button = find.byType(ElevatedButton);
+    await tester.ensureVisible(button);
+    await tester.tap(button);
     await tester.pumpAndSettle();
 
     expect(find.text('Tarefas'), findsOneWidget);
@@ -51,7 +57,9 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    await tester.tap(find.byType(ElevatedButton));
+    final button = find.byType(ElevatedButton);
+    await tester.ensureVisible(button);
+    await tester.tap(button);
     await tester.pumpAndSettle();
 
     expect(find.text('Tarefas'), findsNothing);

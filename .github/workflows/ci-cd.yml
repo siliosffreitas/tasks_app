@@ -38,12 +38,12 @@ jobs:
           min_coverage: 80
 
       - name: Google Cloud Auth
-        uses: 'google-github-actions/auth@v0'
+        uses: 'google-github-actions/auth@v2'
         with:
           credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
 
       - name: Setup Google Cloud SDK
-        uses: 'google-github-actions/setup-gcloud@v0'
+        uses: 'google-github-actions/setup-gcloud@v2'
       
       - name: Run Android integration tests
         run: ./integration_android.sh

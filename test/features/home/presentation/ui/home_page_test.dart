@@ -29,7 +29,7 @@ void main() {
       ),
       TaskViewmodel(
         id: faker.guid.guid(),
-        title: faker.lorem.sentence(),
+        title: faker.lorem.sentence() + faker.lorem.sentence(),
         description: faker.lorem.sentence(),
       ),
     ];

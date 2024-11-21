@@ -42,8 +42,8 @@ jobs:
         with:
           credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
 
-      - name: Setup Google Cloud SDN
-        uses: 'google-github-actions/setup-gcloud@master'
+      - name: Setup Google Cloud SDK
+        uses: 'google-github-actions/setup-gcloud@v0'
       
       - name: Run Android integration tests
         run: ./integration_android.sh

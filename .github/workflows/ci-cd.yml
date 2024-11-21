@@ -37,6 +37,18 @@ jobs:
         with:
           min_coverage: 80
 
+      - name: Google Cloud Auth
+        uses: 'google-github-actions/auth@v0'
+        with:
+          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+      - name: Setup Google Cloud SDN
+        uses: 'google-github-actions/setup-gcloud@master'
+      
+      - name: Run Android integration tests
+        run: ./integration_android.sh
+
+
   # build_ios:
   #   name: Build Flutter (iOS)
   #   needs: [flutter_test]

@@ -13,6 +13,10 @@ void main() {
 
     final button = find.byType(TextButton);
 
+    await tester.drag(
+        find.byType(SingleChildScrollView), const Offset(0.0, -300));
+    await tester.pump();
+
     await tester.ensureVisible(button);
 
     await tester.pumpAndSettle(const Duration(seconds: 1));

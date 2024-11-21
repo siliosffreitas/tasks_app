@@ -11,9 +11,11 @@ void main() {
     app.main();
     await tester.pumpAndSettle();
 
-    final button = find.text('Criar conta');
+    final button = find.byType(TextButton);
 
     await tester.ensureVisible(button);
+
+    await tester.pumpAndSettle(const Duration(seconds: 1));
 
     await tester.tap(button);
 

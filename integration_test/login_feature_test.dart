@@ -6,24 +6,6 @@ import 'package:tasks_app/main.dart' as app;
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets('Should present Create account page com button click',
-      ((WidgetTester tester) async {
-    app.main();
-    await tester.pumpAndSettle();
-
-    final button = find.byType(TextButton);
-
-    await tester.ensureVisible(button);
-
-    await tester.pumpAndSettle(const Duration(seconds: 1));
-
-    await tester.tap(button);
-
-    await tester.pumpAndSettle();
-
-    expect(find.text('Crie sua conta fácil'), findsOneWidget);
-  }));
-
   testWidgets('Should login with success', ((WidgetTester tester) async {
     app.main();
     await tester.pumpAndSettle();
@@ -66,5 +48,27 @@ void main() {
 
     expect(find.text('Tarefas'), findsNothing);
     expect(find.text('Atenção'), findsOneWidget);
+  }));
+
+  testWidgets('Should present Create account page com button click',
+      ((WidgetTester tester) async {
+    app.main();
+    await tester.pumpAndSettle();
+
+    final button = find.byType(TextButton);
+
+    await tester.drag(
+        find.byType(SingleChildScrollView), const Offset(0.0, -300));
+    await tester.pump();
+
+    await tester.ensureVisible(button);
+
+    await tester.pumpAndSettle(const Duration(seconds: 1));
+
+    await tester.tap(button);
+
+    await tester.pumpAndSettle();
+
+    expect(find.text('Crie sua conta fácil'), findsOneWidget);
   }));
 }

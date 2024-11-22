@@ -10,6 +10,8 @@ void main() {
     await app.main();
     await tester.pumpAndSettle();
 
+    await Future.delayed(const Duration(seconds: 2));
+
     await tester.enterText(
         find.bySemanticsLabel('E-mail'), 'siliosffreitas@gmail.com');
     await tester.enterText(find.bySemanticsLabel('Senha'), 'Silio123\$');

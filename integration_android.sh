@@ -3,7 +3,7 @@ flutter clean
 flutter pub get
 flutter build apk
 ./gradlew app:assembleAndroidTest
-./gradlew app:assembleDebug -Ptarget=integration_test/login_feature_test.dart 
+./gradlew app:assembleDebug -Ptarget=integration_test/login_feature_test.dart
 popd
 
 gcloud firebase test android run \

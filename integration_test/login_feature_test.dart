@@ -7,7 +7,7 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   testWidgets('Should login with success', ((WidgetTester tester) async {
-    app.main();
+    await app.main();
     await tester.pumpAndSettle();
 
     await tester.enterText(
@@ -32,7 +32,7 @@ void main() {
   }));
 
   testWidgets('Should login with fails', ((WidgetTester tester) async {
-    app.main();
+    await app.main();
     await tester.pumpAndSettle();
 
     await tester.enterText(
@@ -52,7 +52,7 @@ void main() {
 
   testWidgets('Should present Create account page com button click',
       ((WidgetTester tester) async {
-    app.main();
+    await app.main();
     await tester.pumpAndSettle();
 
     final button = find.byType(TextButton);

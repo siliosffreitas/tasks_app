@@ -6,12 +6,15 @@ import 'package:tasks_app/main.dart' as app;
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets('Should login with success', ((WidgetTester tester) async {
+  Future<void> loadApp(WidgetTester tester) async {
     await app.main();
     await tester.pumpAndSettle();
-
+    // espera a splash terminar
     await Future.delayed(const Duration(seconds: 2));
+  }
 
+  testWidgets('Should login with success', ((WidgetTester tester) async {
+    await loadApp(tester);
     await tester.enterText(
         find.bySemanticsLabel('E-mail'), 'siliosffreitas@gmail.com');
     await tester.enterText(find.bySemanticsLabel('Senha'), 'Silio123\$');
@@ -34,8 +37,7 @@ void main() {
   }));
 
   testWidgets('Should login with fails', ((WidgetTester tester) async {
-    await app.main();
-    await tester.pumpAndSettle();
+    await loadApp(tester);
 
     await tester.enterText(
         find.bySemanticsLabel('E-mail'), 'invalid@email.com');
@@ -54,8 +56,7 @@ void main() {
 
   testWidgets('Should present Create account page com button click',
       ((WidgetTester tester) async {
-    await app.main();
-    await tester.pumpAndSettle();
+    await loadApp(tester);
 
     final button = find.byType(TextButton);
 
